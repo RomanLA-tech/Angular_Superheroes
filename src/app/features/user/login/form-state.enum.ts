@@ -1,4 +1,4 @@
 export enum FormState {
-	Login = 'login',
-	Register = 'register'
+	LOGIN = 'login',
+	REGISTER = 'register',
 }
