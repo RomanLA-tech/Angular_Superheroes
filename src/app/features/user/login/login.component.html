@@ -1,15 +1,4 @@
-<div [ngSwitch]='formState' class='form-control'>
-
-	<div *ngSwitchCase='"register"'>
-		<ng-container *ngTemplateOutlet='register'></ng-container>
-	</div>
-	<div *ngSwitchDefault>
-		<ng-container *ngTemplateOutlet='login'></ng-container>
-	</div>
-
-</div>
-
-<ng-template #login>
+<ng-template [ngIf]='isLoginForm' [ngIfElse]='register' >
 	<form (ngSubmit)='loginUser()' [formGroup]='loginForm' class='card'>
 
 		<div [ngClass]='{invalid: loginForm.controls["email"].touched && loginForm.controls["email"].invalid}'
@@ -43,7 +32,7 @@
 		<button
 				class='btn btn-primary'
 				type='button'
-				(click)='setFormState(formState.REGISTER)'
+				(click)='setFormState()'
 		>
 			Create New User
 		</button>
@@ -100,7 +89,7 @@
 		<button
 				class='btn btn-primary'
 				type='button'
-				(click)='setFormState(formState.LOGIN)'
+				(click)='setFormState()'
 		>
 		Or Sign In
 		</button>

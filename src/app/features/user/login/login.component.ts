@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { CustomValidators } from '@utils/validators';
-import { FormState } from '@user/login/form-state.enum';
 import { LoginForm, RegisterForm } from '@user/login/login.interface';
 
 @Component({
@@ -11,7 +10,7 @@ import { LoginForm, RegisterForm } from '@user/login/login.interface';
 })
 export class LoginComponent {
 	
-	public formState = FormState
+	public isLoginForm = true;
 	
 	public readonly loginForm: FormGroup<LoginForm> = new FormGroup<LoginForm>({
 		email: new FormControl<string>('', {
@@ -45,9 +44,8 @@ export class LoginComponent {
 	
 	public createUser(): void {}
 	
-	public setFormState(state: any): void {
-		console.log(state)
-		this.formState = state;
+	public setFormState(): void {
+		this.isLoginForm = !this.isLoginForm;
 	}
 	
 }

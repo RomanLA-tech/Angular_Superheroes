@@ -10,3 +10,5 @@ export interface RegisterForm {
 	email: FormControl<string>;
 	password: FormControl<string>;
 }
+
+export type FormTypes = 'register' | 'login';
