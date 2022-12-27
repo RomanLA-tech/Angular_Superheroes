@@ -1,4 +1,4 @@
-<div [ngSwitch]='isRegister' class='form-control'>
+<div [ngSwitch]='formState' class='form-control'>
 
 	<div *ngSwitchCase='"register"'>
 		<ng-container *ngTemplateOutlet='register'></ng-container>
@@ -33,7 +33,7 @@
 		</div>
 
 		<button
-				[disabled]='!loginForm.valid'
+				[disabled]='loginForm.invalid'
 				class='btn btn-primary'
 				type='submit'
 		>
@@ -43,7 +43,7 @@
 		<button
 				class='btn btn-primary'
 				type='button'
-				(click)='switchIsRegister()'
+				(click)='setFormState("register")'
 		>
 			Create New User
 		</button>
@@ -90,7 +90,7 @@
 		</div>
 
 		<button
-				[disabled]='!loginForm.valid'
+				[disabled]='registerForm.invalid'
 				class='btn btn-primary'
 				type='submit'
 		>
@@ -100,7 +100,7 @@
 		<button
 				class='btn btn-primary'
 				type='button'
-				(click)='switchIsRegister()'
+				(click)='setFormState("login")'
 		>
 		Or Sign In
 		</button>

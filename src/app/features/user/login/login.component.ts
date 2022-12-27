@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { CustomValidators } from '@utils/validators';
+import { FormState } from '@user/login/form-state.enum';
+import { FormTypes, LoginForm, RegisterForm } from '@user/login/login.interface';
 
 @Component({
 	selector: 'app-login',
@@ -9,32 +11,46 @@ import { CustomValidators } from '@utils/validators';
 })
 export class LoginComponent {
 	
-	public isRegister: 'login' | 'register' = 'login';
+	public formState: FormState = FormState.Login;
 	
-	readonly loginForm: FormGroup = this.fb.group({
-		email: ['', [Validators.required, this.validators.validateEmail]],
-		password: ['', [Validators.required, this.validators.validatePassword]]
+	readonly loginForm: FormGroup = new FormGroup<LoginForm>({
+		email: new FormControl<string>('', {
+			nonNullable: true,
+			validators: [this.validators.validateEmail]
+		}),
+		password: new FormControl<string>('', {
+			nonNullable: true,
+			validators: [this.validators.validatePassword]
+		})
 	});
-	readonly registerForm: FormGroup = this.fb.group({
-		username: ['', [Validators.required, this.validators.validateUsername]],
-		email: ['', [Validators.required, this.validators.validateEmail]],
-		password: ['', [Validators.required, this.validators.validatePassword]]
+	
+	readonly registerForm: FormGroup<RegisterForm> = new FormGroup<RegisterForm>({
+		username: new FormControl<string>('', {
+			nonNullable: true,
+			validators: [this.validators.validateUsername]
+		}),
+		email: new FormControl<string>('', {
+			nonNullable: true,
+			validators: [this.validators.validateEmail]
+		}),
+		password: new FormControl<string>('', {
+			nonNullable: true,
+			validators: [this.validators.validatePassword]
+		})
 	});
 	
+	constructor(private readonly validators: CustomValidators) {}
 	
-	constructor(private fb: FormBuilder, private validators: CustomValidators) {}
+	public loginUser(): void {}
 	
-	public loginUser() {
+	public createUser(): void {}
 	
+	public setFormState(state: FormTypes): void {
+		if (state === 'register') {
+			this.formState = FormState.Register;
+		} else if (state === 'login') {
+			this.formState = FormState.Login;
+		}
 	}
 	
-	public createUser() {
-	
-	}
-	
-	public switchIsRegister() {
-		(this.isRegister === 'login')
-			? (this.isRegister = 'register')
-			: (this.isRegister = 'login');
-	}
 }
