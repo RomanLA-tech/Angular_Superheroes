@@ -12,12 +12,12 @@ export interface RegisterForm {
 }
 
 export interface LoginFormValue {
-  email: string;
-  password: string;
+  email: Readonly<string>;
+  password: Readonly<string>;
 }
 
 export interface RegisterFormValue {
-  email: string;
-  password: string;
-  username: string;
+  email: Readonly<string>;
+  password: Readonly<string>;
+  username: Readonly<string>;
 }

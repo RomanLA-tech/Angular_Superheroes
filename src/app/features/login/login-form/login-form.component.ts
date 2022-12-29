@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Subject, takeUntil } from 'rxjs';
 
 import {
   LoginForm,
@@ -25,7 +25,7 @@ export class LoginFormComponent implements OnInit, OnDestroy {
   public isLoginForm = true;
   public registerForm: FormGroup<RegisterForm>;
   public loginForm: FormGroup<LoginForm>;
-  private routerSub: Subscription;
+  private destroy$ = new Subject<void>();
 
   constructor(
     public readonly auth: AuthService,
@@ -62,7 +62,7 @@ export class LoginFormComponent implements OnInit, OnDestroy {
       })
     });
 
-    this.routerSub = this.route.queryParams.subscribe((params: Params) => {
+    this.route.queryParams.pipe(takeUntil(this.destroy$)).subscribe((params: Params) => {
       if (params['authExpired']) {
         this.errorMessage = `Your current session has expired. Please login
                               again to continue using this app!`;
@@ -71,9 +71,8 @@ export class LoginFormComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    if (this.routerSub) {
-      this.routerSub.unsubscribe();
-    }
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   public loginUser(): void {

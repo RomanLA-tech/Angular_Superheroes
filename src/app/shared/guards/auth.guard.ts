@@ -11,8 +11,8 @@ export class AuthGuard implements CanActivate {
   }
 
   canActivate(
-    route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): boolean {
+    route: Readonly<ActivatedRouteSnapshot>,
+    state: Readonly<RouterStateSnapshot>): boolean {
     if (this.auth.isAuthenticated()) {
       return true;
     }
@@ -24,5 +24,4 @@ export class AuthGuard implements CanActivate {
     });
     return false;
   }
-
 }
