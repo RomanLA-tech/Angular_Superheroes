@@ -9,22 +9,22 @@
           <mat-label>Email</mat-label>
           <input type='email' matInput formControlName='email'
                  required placeholder='Email'>
-          <mat-error *ngIf='loginForm.controls["email"].touched && loginForm.controls["email"].invalid'>
-            <small *ngIf='loginForm.controls["email"].errors?.["customEmail"]'>
+          <div *ngIf='loginForm.controls["email"].touched && loginForm.controls["email"].invalid'>
+            <mat-error *ngIf='loginForm.controls["email"].errors?.["customEmail"]'>
               Please enter a valid email address
-            </small>
-          </mat-error>
+            </mat-error>
+          </div>
         </mat-form-field>
 
         <mat-form-field class='field-full-width'>
           <mat-label>Password</mat-label>
           <input type='password' matInput formControlName='password'
                  required placeholder='Password'>
-          <mat-error *ngIf='loginForm.controls["password"].touched && loginForm.controls["password"].invalid'>
-            <small *ngIf='loginForm.controls["password"].errors?.["customPassword"]'>
+          <div *ngIf='loginForm.controls["password"].touched && loginForm.controls["password"].invalid'>
+            <mat-error *ngIf='loginForm.controls["password"].errors?.["customPassword"]'>
               Should contain: at least one uppercase letter, one number, one special symbol. $ % . & ! -
-            </small>
-          </mat-error>
+            </mat-error>
+          </div>
         </mat-form-field>
       </div>
     </form>
@@ -33,7 +33,7 @@
       <button class='form-btn' mat-raised-button (click)='loginUser()' [disabled]='loginForm.invalid' color='primary'>
         Sign in
       </button>
-      <button mat-raised-button class='form-btn' (click)='setFormState()'>
+      <button mat-raised-button class='form-btn' (click)='toggleFormState()'>
         Create new user
       </button>
     </div>
@@ -49,33 +49,34 @@
         <mat-label>Username</mat-label>
         <input type='text' matInput formControlName='username'
                placeholder='Username'>
-        <mat-error *ngIf='registerForm.controls["username"].touched && registerForm.controls["username"].invalid'>
-          <small>
+        <div *ngIf='registerForm.controls["username"].touched && registerForm.controls["username"].invalid'>
+          <mat-error>
             Should contain two words, kebab-case, camelCase, Space Case - allowed, should be at least 8 characters
             length, no special symbols or numbers allowed
-          </small>
-        </mat-error>
+          </mat-error>
+        </div>
       </mat-form-field>
 
       <mat-form-field class='field-full-width'>
         <mat-label>Email</mat-label>
         <input type='email' matInput formControlName='email'
                required placeholder='Email'>
-        <mat-error *ngIf='registerForm.controls["email"].touched && registerForm.controls["email"].invalid'>
-          <small *ngIf='registerForm.controls["email"].errors?.["customEmail"]'>Please enter a valid email
-            address</small>
-        </mat-error>
+        <div *ngIf='registerForm.controls["email"].touched && registerForm.controls["email"].invalid'>
+          <mat-error *ngIf='registerForm.controls["email"].errors?.["customEmail"]'>
+            Please enter a valid email address
+          </mat-error>
+        </div>
       </mat-form-field>
 
       <mat-form-field class='field-full-width'>
         <mat-label>Password</mat-label>
         <input type='password' matInput formControlName='password'
                required placeholder='Password'>
-        <mat-error *ngIf='registerForm.controls["password"].touched && registerForm.controls["password"].invalid'>
-          <small *ngIf='registerForm.controls["password"].errors?.["customPassword"]'>
+        <div *ngIf='registerForm.controls["password"].touched && registerForm.controls["password"].invalid'>
+          <mat-error *ngIf='registerForm.controls["password"].errors?.["customPassword"]'>
             Should contain: at least one uppercase letter, one number, one special symbol. $ % . & ! -
-          </small>
-        </mat-error>
+          </mat-error>
+        </div>
       </mat-form-field>
     </div>
   </form>
@@ -85,7 +86,7 @@
             color='primary'>
       Create new user
     </button>
-    <button class='form-btn' mat-raised-button (click)='setFormState()'>
+    <button class='form-btn' mat-raised-button (click)='toggleFormState()'>
       Or Sign in
     </button>
   </div>

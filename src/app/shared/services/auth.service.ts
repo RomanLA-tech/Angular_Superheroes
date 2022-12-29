@@ -1,12 +1,12 @@
-import {Injectable} from '@angular/core';
+import { Injectable } from '@angular/core';
 
-import {User} from '@shared/interfaces';
+import { User } from '@shared/interfaces';
 
 @Injectable({providedIn: 'root'})
 export class AuthService {
-  private isLogged: boolean = false;
+  private isLogged = false;
 
-  public login(usersData: User): void {
+  public login(usersData: Readonly<User>): void {
     this.authUserInit(usersData);
     this.isLogged = true;
   }
@@ -18,7 +18,6 @@ export class AuthService {
 
   public isAuthenticated(): boolean {
     if (this.isSessionExpired()) {
-      this.isLogged = false;
       this.logout();
     } else {
       this.isLogged = true;
@@ -26,7 +25,7 @@ export class AuthService {
     return this.isLogged;
   }
 
-  private authUserInit(userData: User): void {
+  private authUserInit(userData: Readonly<User>): void {
     const expiredToken = Date.now() + 3600000;
     const authUser = {...userData, 'expiredSession': expiredToken};
     localStorage.setItem('authUser', JSON.stringify(authUser));

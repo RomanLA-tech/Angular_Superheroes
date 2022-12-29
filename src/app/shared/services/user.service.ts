@@ -1,6 +1,6 @@
-import {Injectable} from '@angular/core';
+import { Injectable } from '@angular/core';
 
-import {User} from '@shared/interfaces';
+import { User } from '@shared/interfaces';
 
 @Injectable({providedIn: 'root'})
 export class UsersService {

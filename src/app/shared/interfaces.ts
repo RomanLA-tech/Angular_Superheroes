@@ -1,5 +1,5 @@
 export interface User {
-  email: string;
-  password: string;
-  username: string;
+  email: Readonly<string>;
+  password: Readonly<string>;
+  username: Readonly<string>;
 }

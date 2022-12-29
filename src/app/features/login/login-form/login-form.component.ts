@@ -1,11 +1,17 @@
-import {Component} from '@angular/core';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {ActivatedRoute, Params, Router} from '@angular/router';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Params, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
-import {LoginForm, RegisterForm} from '@features/login/login-form/login-form.interface';
-import {AuthService} from '@services/auth.service';
-import {User} from '@shared/interfaces';
-import {CustomValidators} from '@utils/validators';
+import {
+  LoginForm,
+  LoginFormValue,
+  RegisterForm,
+  RegisterFormValue
+} from '@features/login/login-form/login-form.interface';
+import { AuthService } from '@services/auth.service';
+import { User } from '@shared/interfaces';
+import { CustomValidators } from '@utils/validators';
 
 @Component({
   selector: 'app-login-form',
@@ -13,37 +19,13 @@ import {CustomValidators} from '@utils/validators';
   styleUrls: ['./login-form.component.scss']
 })
 
-export class LoginFormComponent {
+export class LoginFormComponent implements OnInit, OnDestroy {
 
-  public submitted = false;
-  public errorMessage: string = '';
+  public errorMessage = '';
   public isLoginForm = true;
-
-  public readonly loginForm: FormGroup<LoginForm> = new FormGroup<LoginForm>({
-    email: new FormControl<string>('', {
-      nonNullable: true,
-      validators: [this.validators.validateEmail]
-    }),
-    password: new FormControl<string>('', {
-      nonNullable: true,
-      validators: [this.validators.validatePassword, Validators.required]
-    })
-  });
-
-  public readonly registerForm: FormGroup<RegisterForm> = new FormGroup<RegisterForm>({
-    username: new FormControl<string>('', {
-      nonNullable: true,
-      validators: [this.validators.validateUsername, Validators.required]
-    }),
-    email: new FormControl<string>('', {
-      nonNullable: true,
-      validators: [this.validators.validateEmail, Validators.required]
-    }),
-    password: new FormControl<string>('', {
-      nonNullable: true,
-      validators: [this.validators.validatePassword, Validators.required]
-    })
-  });
+  public registerForm: FormGroup<RegisterForm>;
+  public loginForm: FormGroup<LoginForm>;
+  private routerSub: Subscription;
 
   constructor(
     public readonly auth: AuthService,
@@ -54,7 +36,33 @@ export class LoginFormComponent {
   }
 
   ngOnInit(): void {
-    this.route.queryParams.subscribe((params: Params) => {
+    this.registerForm = new FormGroup<RegisterForm>({
+      username: new FormControl<string>('', {
+        nonNullable: true,
+        validators: [this.validators.validateUsername, Validators.required]
+      }),
+      email: new FormControl<string>('', {
+        nonNullable: true,
+        validators: [this.validators.validateEmail, Validators.required]
+      }),
+      password: new FormControl<string>('', {
+        nonNullable: true,
+        validators: [this.validators.validatePassword, Validators.required]
+      })
+    });
+
+    this.loginForm = new FormGroup<LoginForm>({
+      email: new FormControl<string>('', {
+        nonNullable: true,
+        validators: [this.validators.validateEmail]
+      }),
+      password: new FormControl<string>('', {
+        nonNullable: true,
+        validators: [this.validators.validatePassword, Validators.required]
+      })
+    });
+
+    this.routerSub = this.route.queryParams.subscribe((params: Params) => {
       if (params['authExpired']) {
         this.errorMessage = `Your current session has expired. Please login
                               again to continue using this app!`;
@@ -62,40 +70,44 @@ export class LoginFormComponent {
     });
   }
 
+  ngOnDestroy(): void {
+    if (this.routerSub) {
+      this.routerSub.unsubscribe();
+    }
+  }
+
   public loginUser(): void {
     if (this.loginForm.invalid) {
       return;
-    } else {
-      this.submitted = true;
-
-      const user: User = {
-        email: this.loginForm.controls['email'].value,
-        password: this.loginForm.controls['password'].value,
-        username: 'Incognito'
-      };
-
-      this.auth.login(user);
-      this.loginForm.reset();
-      this.router.navigate(['/user', 'home']);
     }
+    const loginFormValue: LoginFormValue = this.loginForm.getRawValue();
+    const user: Readonly<User> = {
+      email: loginFormValue.email,
+      password: loginFormValue.password,
+      username: 'Incognito'
+    };
+
+    this.auth.login(user);
+    this.loginForm.reset();
+    this.router.navigate(['home']);
   }
 
   public registerUser(): void {
     if (this.registerForm.invalid) {
       return;
-    } else {
-      const user: User = {
-        email: this.registerForm.controls['email'].value,
-        password: this.registerForm.controls['password'].value,
-        username: this.registerForm.controls['username'].value
-      };
-      this.auth.login(user);
-      this.loginForm.reset();
-      this.router.navigate(['/user', 'home']);
     }
+    const registerFormValue: RegisterFormValue = this.registerForm.getRawValue();
+    const user: User = {
+      email: registerFormValue.email,
+      password: registerFormValue.password,
+      username: registerFormValue.username
+    };
+    this.auth.login(user);
+    this.loginForm.reset();
+    this.router.navigate(['home']);
   }
 
-  public setFormState(): void {
+  public toggleFormState(): void {
     this.isLoginForm = !this.isLoginForm;
   }
 }
