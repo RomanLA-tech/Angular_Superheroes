@@ -1,1 +1,101 @@
-<p>login-page works!</p>
+<ng-template [ngIf]='isLoginForm' [ngIfElse]='register' >
+	<form (ngSubmit)='loginUser()' [formGroup]='loginForm' class='card'>
+
+		<div [ngClass]='{invalid: loginForm.controls["email"].touched && loginForm.controls["email"].invalid}'
+		     class='form-control'>
+			<label for='email'>Email</label>
+			<input formControlName='email' id='email' placeholder='Email' type='email'>
+			<div *ngIf='loginForm.controls["email"].touched && loginForm.controls["email"].invalid'
+			     class='validation'>
+				<small *ngIf='registerForm.controls["email"].errors?.["required"]'>This field is required!</small>
+			</div>
+		</div>
+
+		<div [ngClass]='{invalid: loginForm.controls["password"].touched && registerForm.controls["password"].invalid}'
+		     class='form-control'>
+			<label for='password'>Password</label>
+			<input formControlName='password' id='password' placeholder='Password' type='password'>
+			<div *ngIf='loginForm.controls["password"].touched && loginForm.controls["password"].invalid' class='validation'>
+				<small *ngIf='loginForm.controls["password"].errors?.["required"]'>This field is required!</small>
+				<small>Should contain: at least one uppercase letter, one number, one special symbol. $ % . & ! -</small>
+			</div>
+		</div>
+
+		<button
+				[disabled]='loginForm.invalid'
+				class='btn btn-primary'
+				type='submit'
+		>
+			Sign in
+		</button>
+
+		<button
+				class='btn btn-primary'
+				type='button'
+				(click)='setFormState()'
+		>
+			Create New User
+		</button>
+
+	</form>
+</ng-template>
+
+<ng-template #register>
+	<form (ngSubmit)='createUser()' [formGroup]='registerForm' class='card'>
+
+		<div [ngClass]='{invalid: registerForm.controls["username"].touched && registerForm.controls["username"].invalid}'
+		     class='form-control'>
+			<label for='register-username'>Username</label>
+			<input formControlName='username' id='register-username' placeholder='Username' type='text'>
+			<div *ngIf='registerForm.controls["username"].touched && registerForm.controls["username"].invalid'
+			     class='validation'>
+				<small *ngIf='registerForm.controls["username"].errors?.["required"]'>This field is required!</small>
+				<small>
+					Should contain two words, kebab-case, camelCase, Space Case - allowed, should be at least 8 characters
+					length, no special symbols or numbers allowed
+				</small>
+			</div>
+		</div>
+
+		<div [ngClass]='{invalid: registerForm.controls["email"].touched && registerForm.controls["email"].invalid}'
+		     class='form-control'>
+			<label for='register-email'>Email</label>
+			<input formControlName='email' id='register-email' placeholder='Email' type='email'>
+			<div *ngIf='registerForm.controls["email"].touched && registerForm.controls["email"].invalid'
+			     class='validation'>
+				<small *ngIf='registerForm.controls["email"].errors?.["required"]'>This field is required!</small>
+			</div>
+		</div>
+
+		<div [ngClass]='{invalid: registerForm.controls["password"].touched && registerForm.controls["password"].invalid}'
+		     class='form-control'>
+			<label for='register-password'>Password</label>
+			<input formControlName='password' id='register-password' placeholder='Password' type='password'>
+			<div *ngIf='registerForm.controls["password"].touched && registerForm.controls["password"].invalid'
+			     class='validation'>
+				<small *ngIf='registerForm.controls["password"].errors?.["required"]'>This field is required!</small>
+				<small>Should contain: at least one uppercase letter, one number, one special symbol. $ % . & ! -</small>
+			</div>
+		</div>
+
+		<button
+				[disabled]='registerForm.invalid'
+				class='btn btn-primary'
+				type='submit'
+		>
+			Create user
+		</button>
+
+		<button
+				class='btn btn-primary'
+				type='button'
+				(click)='setFormState()'
+		>
+		Or Sign In
+		</button>
+
+	</form>
+</ng-template>
+
+
+

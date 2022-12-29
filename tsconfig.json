@@ -24,12 +24,30 @@
       "dom"
     ],
     "paths": {
-      "@/shared/*": [
+      "@shared/*": [
         "src/app/shared/*"
       ],
-      "@/user/*": [
-        "src/app/user/*"],
-      "@/utils/*": [
+      "@services/*": [
+        "src/app/shared/services/*"
+      ],
+      "@components/*": [
+        "src/app/shared/components/*"
+      ],
+      "@layouts/*": [
+        "src/app/shared/layouts/*"
+      ],
+      "@pipes/*": [
+        "src/app/shared/pipes/*"
+      ],
+      "@guards/*": [
+        "src/app/shared/guards/*"
+      ],
+      "@features/*": [
+        "src/app/features/*"],
+      "@user/*": [
+        "src/app/features/user/*"
+      ],
+      "@utils/*": [
         "src/app/utils/*"
       ]
     }
