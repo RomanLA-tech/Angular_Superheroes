@@ -1,7 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
-import { SearchForm } from '@features/hero-search/search-form/search-form.interface';
+import { SearchForm } from '@interfaces/hero-search-form.interface';
 
 @Component({
   selector: 'app-search-form',

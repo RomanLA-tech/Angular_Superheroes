@@ -37,6 +37,9 @@
       "@layouts/*": [
         "src/app/shared/layouts/*"
       ],
+      "@interfaces/*": [
+        "src/app/shared/interfaces/*"
+      ],
       "@pipes/*": [
         "src/app/shared/pipes/*"
       ],

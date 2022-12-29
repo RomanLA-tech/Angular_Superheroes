@@ -3,12 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
 
-import {
-  LoginForm,
-  LoginFormValue,
-  RegisterForm,
-  RegisterFormValue
-} from '@features/login/login-form/login-form.interface';
+import { LoginForm, LoginFormValue, RegisterForm, RegisterFormValue } from '@interfaces/login-form.interface';
 import { AuthService } from '@services/auth.service';
 import { User } from '@shared/interfaces';
 import { CustomValidators } from '@utils/validators';

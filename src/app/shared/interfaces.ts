@@ -1,4 +1,4 @@
-import { Hero } from '@features/hero-search/hero.interface';
+import { Hero } from '@shared/interfaces/hero.interface';
 
 export interface User {
   email: Readonly<string>;
