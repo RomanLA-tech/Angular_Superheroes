@@ -24,11 +24,9 @@ export class HeroSearchComponent implements OnInit {
   }
 
   public search(value: string): void {
-    console.log(value);
   }
 
   public selectLetter(letter: string): void {
-    console.log(letter);
   }
 
   public selectHero(heroId: string): void {
