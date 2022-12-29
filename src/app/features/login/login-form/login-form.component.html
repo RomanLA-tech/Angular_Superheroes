@@ -1,0 +1,94 @@
+<div class='form-container'>
+  <div *ngIf='errorMessage'><p class='text-center'>{{errorMessage}}</p></div>
+
+  <div *ngIf='isLoginForm; else register'>
+    <form [formGroup]='loginForm'>
+      <div class='form-inputs-container'>
+
+        <mat-form-field class='field-full-width'>
+          <mat-label>Email</mat-label>
+          <input type='email' matInput formControlName='email'
+                 required placeholder='Email'>
+          <mat-error *ngIf='loginForm.controls["email"].touched && loginForm.controls["email"].invalid'>
+            <small *ngIf='loginForm.controls["email"].errors?.["customEmail"]'>
+              Please enter a valid email address
+            </small>
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class='field-full-width'>
+          <mat-label>Password</mat-label>
+          <input type='password' matInput formControlName='password'
+                 required placeholder='Password'>
+          <mat-error *ngIf='loginForm.controls["password"].touched && loginForm.controls["password"].invalid'>
+            <small *ngIf='loginForm.controls["password"].errors?.["customPassword"]'>
+              Should contain: at least one uppercase letter, one number, one special symbol. $ % . & ! -
+            </small>
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </form>
+
+    <div class='form-buttons-container'>
+      <button class='form-btn' mat-raised-button (click)='loginUser()' [disabled]='loginForm.invalid' color='primary'>
+        Sign in
+      </button>
+      <button mat-raised-button class='form-btn' (click)='setFormState()'>
+        Create new user
+      </button>
+    </div>
+  </div>
+
+</div>
+
+<ng-template #register>
+  <form [formGroup]='registerForm'>
+    <div class='form-inputs-container'>
+
+      <mat-form-field class='field-full-width'>
+        <mat-label>Username</mat-label>
+        <input type='text' matInput formControlName='username'
+               placeholder='Username'>
+        <mat-error *ngIf='registerForm.controls["username"].touched && registerForm.controls["username"].invalid'>
+          <small>
+            Should contain two words, kebab-case, camelCase, Space Case - allowed, should be at least 8 characters
+            length, no special symbols or numbers allowed
+          </small>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class='field-full-width'>
+        <mat-label>Email</mat-label>
+        <input type='email' matInput formControlName='email'
+               required placeholder='Email'>
+        <mat-error *ngIf='registerForm.controls["email"].touched && registerForm.controls["email"].invalid'>
+          <small *ngIf='registerForm.controls["email"].errors?.["customEmail"]'>Please enter a valid email
+            address</small>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class='field-full-width'>
+        <mat-label>Password</mat-label>
+        <input type='password' matInput formControlName='password'
+               required placeholder='Password'>
+        <mat-error *ngIf='registerForm.controls["password"].touched && registerForm.controls["password"].invalid'>
+          <small *ngIf='registerForm.controls["password"].errors?.["customPassword"]'>
+            Should contain: at least one uppercase letter, one number, one special symbol. $ % . & ! -
+          </small>
+        </mat-error>
+      </mat-form-field>
+    </div>
+  </form>
+
+  <div class='form-buttons-container'>
+    <button class='form-btn' mat-raised-button (click)='registerUser()' [disabled]='registerForm.invalid'
+            color='primary'>
+      Create new user
+    </button>
+    <button class='form-btn' mat-raised-button (click)='setFormState()'>
+      Or Sign in
+    </button>
+  </div>
+</ng-template>
+
+
