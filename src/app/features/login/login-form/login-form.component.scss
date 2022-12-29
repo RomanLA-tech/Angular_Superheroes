@@ -1,0 +1,35 @@
+.form-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.field-full-width {
+  width: 100%;
+}
+
+.form-btn {
+  width: 18vw;
+  margin: 10px;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.form-inputs-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 40vw;
+}
+
+.form-buttons-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.text-center {
+  text-align: center;
+}

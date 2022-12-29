@@ -19,6 +19,7 @@
     "target": "ES2022",
     "module": "ES2022",
     "useDefineForClassFields": false,
+    "strictPropertyInitialization": false,
     "lib": [
       "ESNext",
       "dom"
@@ -43,12 +44,13 @@
         "src/app/shared/guards/*"
       ],
       "@features/*": [
-        "src/app/features/*"],
-      "@user/*": [
-        "src/app/features/user/*"
+        "src/app/features/*"
       ],
       "@utils/*": [
         "src/app/utils/*"
+      ],
+      "@environments/*": [
+        "src/environments/*"
       ]
     }
   },

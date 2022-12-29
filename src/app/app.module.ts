@@ -1,24 +1,22 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { AppComponent } from './app.component';
+import {NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
-import { AppRoutingModule } from './app-routing.module';
-import { MainLayoutComponent } from '@layouts/main-layout/main-layout.component';
-import { UserModule } from '@user/user.module';
-
-
+import {MainLayoutModule} from '@layouts/main-layout/main-layout.module';
+import {HeroInfoComponent} from '@features/hero-info/hero-info.component';
+import {AppRoutingModule} from './app-routing.module';
+import {AppComponent} from './app.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    MainLayoutComponent
-  ],
+  declarations: [AppComponent, HeroInfoComponent],
   imports: [
     BrowserModule,
-    AppRoutingModule,
-    UserModule
+    MainLayoutModule,
+    BrowserAnimationsModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
