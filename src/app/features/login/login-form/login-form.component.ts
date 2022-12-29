@@ -88,7 +88,7 @@ export class LoginFormComponent implements OnInit, OnDestroy {
 
     this.auth.login(user);
     this.loginForm.reset();
-    this.router.navigate(['home']);
+    this.router.navigate(['search']);
   }
 
   public registerUser(): void {
@@ -103,7 +103,7 @@ export class LoginFormComponent implements OnInit, OnDestroy {
     };
     this.auth.login(user);
     this.loginForm.reset();
-    this.router.navigate(['home']);
+    this.router.navigate(['search']);
   }
 
   public toggleFormState(): void {

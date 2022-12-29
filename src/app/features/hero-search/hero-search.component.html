@@ -1,0 +1,27 @@
+<div class="hero-search">
+
+  <app-search-form (formValue)="search($event)">
+
+    <app-alphabet-selection
+      (letterSelected)="selectLetter($event)"
+    ></app-alphabet-selection>
+
+  </app-search-form>
+
+  <div class="recent-searches">
+    <mat-chip-listbox>
+      <mat-chip-option *ngFor="let search of recentSearches">
+        {{search}}
+      </mat-chip-option>
+    </mat-chip-listbox>
+  </div>
+
+  <ng-container *ngFor="let hero of heroes">
+    <app-hero-card
+      (heroSelectBtnClick)="selectHero($event)"
+      [selectedHeroId]="selectedHero"
+      [hero]="hero!"
+    >
+    </app-hero-card>
+  </ng-container>
+</div>

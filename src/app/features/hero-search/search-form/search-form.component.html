@@ -1,0 +1,20 @@
+<div class="search-container">
+  <form [formGroup]="searchForm">
+
+    <ng-content></ng-content>
+
+    <mat-form-field class="hero-search-input">
+      <input matInput type="text"
+             formControlName="query"
+             placeholder="Search for a hero">
+    </mat-form-field>
+
+    <button mat-raised-button
+            color="primary"
+            (click)="onSubmit()"
+    >
+      Search
+    </button>
+
+  </form>
+</div>

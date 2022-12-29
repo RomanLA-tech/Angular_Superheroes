@@ -1,0 +1,18 @@
+<div class="alphabet-selection">
+
+  <div class="selected-letter"
+       (click)="toggleLetters()">
+    {{selectedLetter}}
+  </div>
+
+  <div class="letter-list"
+       *ngIf="showLetters">
+
+    <div class="letter"
+         *ngFor="let letter of alphabet"
+         (click)="selectLetter(letter)">
+      {{letter}}
+    </div>
+
+  </div>
+</div>
