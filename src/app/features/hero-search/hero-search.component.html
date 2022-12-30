@@ -1,13 +1,19 @@
 <div class="hero-search">
 
-  <app-search-form (formValue)="search($event)">
-
-    <app-alphabet-selection
-      (letterSelected)="selectLetter($event)"
-    ></app-alphabet-selection>
-
-  </app-search-form>
-
+  <form [formGroup]="searchForm">
+    <div class="search-container">
+      <app-alphabet-selection
+        (letterSelected)="selectLetter($event)"
+      ></app-alphabet-selection>
+      <app-search-form-input [formControlName]="'searchField'"></app-search-form-input>
+      <button mat-raised-button
+              color="primary"
+              (click)="onSubmit()"
+      >
+        Search
+      </button>
+    </div>
+  </form>
   <div class="recent-searches">
     <mat-chip-listbox>
       <mat-chip-option *ngFor="let search of recentSearches">

@@ -9,16 +9,16 @@ import { MatChipsModule } from '@angular/material/chips';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
-import { SearchFormComponent } from './search-form/search-form.component';
 import { AlphabetSelectionComponent } from './alphabet-selection/alphabet-selection.component';
 import { HeroCardComponent } from './hero-card/hero-card.component';
+import { SearchFormInputComponent } from './search-form-input/search-form-input.component';
 
 @NgModule({
   declarations: [
     HeroSearchComponent,
-    SearchFormComponent,
     AlphabetSelectionComponent,
-    HeroCardComponent
+    HeroCardComponent,
+    SearchFormInputComponent
   ],
   imports: [
     CommonModule,

@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { Hero } from '@shared/interfaces/hero.interface';
 import { HeroService } from '@services/hero.service';
 import { HEROES } from '@utils/constants';
+import { FormControl, FormGroup } from '@angular/forms';
+import { SearchForm } from '@interfaces/hero-search-form.interface';
 
 @Component({
   selector: 'app-hero-search',
@@ -14,6 +16,9 @@ export class HeroSearchComponent implements OnInit {
   public recentSearches: string[];
   public selectedHero: Readonly<string>;
   public readonly heroes: ReadonlyArray<Hero>;
+  public searchForm: FormGroup<SearchForm> = new FormGroup<SearchForm>({
+    searchField: new FormControl<string>('', {nonNullable: true})
+  });
 
   constructor(private readonly heroService: HeroService) {
     this.heroes = HEROES;
@@ -39,4 +44,9 @@ export class HeroSearchComponent implements OnInit {
 
   private addToRecentSearches(search: string): void {
   }
+
+  public onSubmit(): void {
+    console.log(this.searchForm.value);
+  }
+
 }
