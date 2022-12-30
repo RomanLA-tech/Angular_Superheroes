@@ -5,7 +5,7 @@ import { Subject, takeUntil } from 'rxjs';
 
 import { LoginForm, LoginFormValue, RegisterForm, RegisterFormValue } from '@interfaces/login-form.interface';
 import { AuthService } from '@services/auth.service';
-import { User } from '@shared/interfaces';
+import { User } from '@interfaces/user.interface';
 import { CustomValidators } from '@utils/validators';
 
 @Component({
@@ -30,39 +30,10 @@ export class LoginFormComponent implements OnInit, OnDestroy {
   ) {
   }
 
-  ngOnInit(): void {
-    this.registerForm = new FormGroup<RegisterForm>({
-      username: new FormControl<string>('', {
-        nonNullable: true,
-        validators: [this.validators.validateUsername, Validators.required]
-      }),
-      email: new FormControl<string>('', {
-        nonNullable: true,
-        validators: [this.validators.validateEmail, Validators.required]
-      }),
-      password: new FormControl<string>('', {
-        nonNullable: true,
-        validators: [this.validators.validatePassword, Validators.required]
-      })
-    });
-
-    this.loginForm = new FormGroup<LoginForm>({
-      email: new FormControl<string>('', {
-        nonNullable: true,
-        validators: [this.validators.validateEmail]
-      }),
-      password: new FormControl<string>('', {
-        nonNullable: true,
-        validators: [this.validators.validatePassword, Validators.required]
-      })
-    });
-
-    this.route.queryParams.pipe(takeUntil(this.destroy$)).subscribe((params: Params) => {
-      if (params['authExpired']) {
-        this.errorMessage = `Your current session has expired. Please login
-                              again to continue using this app!`;
-      }
-    });
+  public ngOnInit(): void {
+    this.loginFormInit();
+    this.registerFormInit();
+    this.onRouteQueryParamsSubscribe();
   }
 
   ngOnDestroy(): void {
@@ -80,10 +51,7 @@ export class LoginFormComponent implements OnInit, OnDestroy {
       password: loginFormValue.password,
       username: 'Incognito'
     };
-
-    this.auth.login(user);
-    this.loginForm.reset();
-    this.router.navigate(['search']);
+    this.onSuccessfulLoginActions(user)
   }
 
   public registerUser(): void {
@@ -96,12 +64,56 @@ export class LoginFormComponent implements OnInit, OnDestroy {
       password: registerFormValue.password,
       username: registerFormValue.username
     };
-    this.auth.login(user);
-    this.loginForm.reset();
-    this.router.navigate(['search']);
+    this.onSuccessfulLoginActions(user)
   }
 
   public toggleFormState(): void {
     this.isLoginForm = !this.isLoginForm;
   }
+
+  private onSuccessfulLoginActions(user: Readonly<User>) {
+    this.auth.login(user);
+    this.loginForm.reset();
+    this.router.navigate(['search']);
+  }
+
+  private loginFormInit() {
+    this.loginForm = new FormGroup<LoginForm>({
+      email: new FormControl<string>('', {
+        nonNullable: true,
+        validators: [this.validators.validateEmail]
+      }),
+      password: new FormControl<string>('', {
+        nonNullable: true,
+        validators: [this.validators.validatePassword, Validators.required]
+      })
+    });
+  }
+
+  private registerFormInit() {
+    this.registerForm = new FormGroup<RegisterForm>({
+      username: new FormControl<string>('', {
+        nonNullable: true,
+        validators: [this.validators.validateUsername, Validators.required]
+      }),
+      email: new FormControl<string>('', {
+        nonNullable: true,
+        validators: [this.validators.validateEmail, Validators.required]
+      }),
+      password: new FormControl<string>('', {
+        nonNullable: true,
+        validators: [this.validators.validatePassword, Validators.required]
+      })
+    });
+  }
+
+  private onRouteQueryParamsSubscribe() {
+    this.route.queryParams.pipe(takeUntil(this.destroy$)).subscribe((params: Params) => {
+      if (params['authExpired']) {
+        this.errorMessage = `Your current session has expired. Please login
+                              again to continue using this app!`;
+      }
+    });
+  }
+
 }

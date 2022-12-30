@@ -17,9 +17,7 @@ export class MainLayoutComponent implements DoCheck {
   }
 
   ngDoCheck(): void {
-    if (this.authService.isAuthenticated()) {
-      this.isAuth = true;
-    }
+    this.checkIsAuth();
   }
 
   public logout() {
@@ -29,5 +27,11 @@ export class MainLayoutComponent implements DoCheck {
       this.router.navigate(['login']);
     }
     return;
+  }
+
+  private checkIsAuth() {
+    if (this.authService.isAuthenticated()) {
+      this.isAuth = true;
+    }
   }
 }

@@ -9,18 +9,18 @@ import { ALPHABET_ARR } from '@utils/constants';
 })
 export class AlphabetSelectionComponent implements OnInit {
 
-  @Output() letterSelected = new EventEmitter<string>();
+  @Output() letterSelected: EventEmitter<string> = new EventEmitter<string>();
 
-  public selectedLetter: string;
-  public showLetters: boolean;
+  public selectedLetter: Readonly<string>;
+  public showLetters: Readonly<boolean>;
   public readonly alphabet: ReadonlyArray<string> = ALPHABET_ARR;
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.selectedLetter = 'A';
     this.showLetters = false;
   }
 
-  public selectLetter(letter: string): void {
+  public selectLetter(letter: Readonly<string>): void {
     this.selectedLetter = letter;
     this.toggleLetters();
     this.letterSelected.emit(this.selectedLetter);
@@ -29,5 +29,4 @@ export class AlphabetSelectionComponent implements OnInit {
   public toggleLetters(): void {
     this.showLetters = !this.showLetters;
   }
-
 }

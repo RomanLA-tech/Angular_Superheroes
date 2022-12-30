@@ -1,33 +1,25 @@
 <div class="hero-search">
 
-  <form [formGroup]="searchForm">
-    <div class="search-container">
-      <app-alphabet-selection
-        (letterSelected)="selectLetter($event)"
-      ></app-alphabet-selection>
-      <app-search-form-input [formControlName]="'searchField'"></app-search-form-input>
-      <button mat-raised-button
-              color="primary"
-              (click)="onSubmit()"
-      >
-        Search
-      </button>
-    </div>
-  </form>
-  <div class="recent-searches">
-    <mat-chip-listbox>
-      <mat-chip-option *ngFor="let search of recentSearches">
-        {{search}}
-      </mat-chip-option>
-    </mat-chip-listbox>
-  </div>
+  <app-search-form [form]="searchForm">
+    <app-alphabet-selection
+      (letterSelected)="selectLetter($event)"
+    ></app-alphabet-selection>
 
-  <ng-container *ngFor="let hero of heroes">
-    <app-hero-card
-      (heroSelectBtnClick)="selectHero($event)"
-      [selectedHeroId]="selectedHero"
-      [hero]="hero!"
-    >
-    </app-hero-card>
-  </ng-container>
+    <button (click)="onSubmit()" color="primary" mat-raised-button>
+      Search
+    </button>
+  </app-search-form>
+
+  <app-recent-searches [recentSearches]="recentSearches"></app-recent-searches>
+
+  <div *ngIf="heroes">
+    <ng-container *ngFor="let hero of heroes">
+      <app-hero-card
+        (heroSelected)="selectHero($event)"
+        [hero]="hero!"
+        [selectedHeroId]="selectedHero"
+      >
+      </app-hero-card>
+    </ng-container>
+  </div>
 </div>

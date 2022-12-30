@@ -11,14 +11,18 @@ import { RouterModule } from '@angular/router';
 
 import { AlphabetSelectionComponent } from './alphabet-selection/alphabet-selection.component';
 import { HeroCardComponent } from './hero-card/hero-card.component';
-import { SearchFormInputComponent } from './search-form-input/search-form-input.component';
+import { SearchFormInputComponent } from './search-form/search-form-input/search-form-input.component';
+import { SearchFormComponent } from './search-form/search-form.component';
+import { RecentSearchesComponent } from './recent-searches/recent-searches.component';
 
 @NgModule({
   declarations: [
     HeroSearchComponent,
     AlphabetSelectionComponent,
     HeroCardComponent,
-    SearchFormInputComponent
+    SearchFormInputComponent,
+    SearchFormComponent,
+    RecentSearchesComponent
   ],
   imports: [
     CommonModule,

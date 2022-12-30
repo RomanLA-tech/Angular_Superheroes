@@ -1,20 +1,21 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 
 import { Hero } from '@shared/interfaces/hero.interface';
 
 @Component({
   selector: 'app-hero-card',
   templateUrl: './hero-card.component.html',
-  styleUrls: ['./hero-card.component.scss']
+  styleUrls: ['./hero-card.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HeroCardComponent {
 
-  @Input() hero: Readonly<Hero>;
-  @Input() selectedHeroId: Readonly<string>;
-  @Output() heroSelectBtnClick = new EventEmitter<string>();
+  @Input() public hero: Readonly<Hero>;
+  @Input() public selectedHeroId: Readonly<string>;
+  @Output() public heroSelected = new EventEmitter<string>();
 
   public setSelectedHero() {
-    this.heroSelectBtnClick.emit(this.hero.id);
+    this.heroSelected.emit(this.hero.id);
   }
 }
 
