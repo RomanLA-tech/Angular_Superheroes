@@ -29,7 +29,7 @@ export class UsersService {
     if (oldState.find((item) => item.id === hero.id)) {
       return;
     }
-    const newState = new Set([hero, ...oldState]);
+    const newState = [hero, ...oldState];
     return localStorage.setItem('heroes', JSON.stringify([...newState]));
   }
 }

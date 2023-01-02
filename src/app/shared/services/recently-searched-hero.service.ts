@@ -20,7 +20,7 @@ export class RecentlySearchedHeroService {
 
   public addHeroToLocalStorage(heroName: string): void {
     const oldState = this.getHeroesFromLocalStorage();
-    const newState = [heroName, ...oldState];
+    const newState = new Set([heroName, ...oldState]);
     localStorage.setItem('recently-searched', JSON.stringify([...newState]));
   }
 
