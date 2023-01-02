@@ -25,6 +25,9 @@ export class UsersService {
 
   public addUserHeroToLocalStorage(hero: Readonly<Hero>): void {
     const oldState = this.getUserHeroesFromLocalStorage();
+    if (oldState.find((item) => item.id === hero.id)) {
+      return;
+    }
     const newState = new Set([hero, ...oldState]);
     return localStorage.setItem('heroes', JSON.stringify([...newState]));
   }
