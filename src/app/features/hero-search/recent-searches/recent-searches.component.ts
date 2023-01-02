@@ -1,33 +1,27 @@
-import { Component, DoCheck, Input } from '@angular/core';
-import { FormGroup } from '@angular/forms';
-
-import { SearchForm } from '@interfaces/hero-search-form.interface';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { RecentlySearchedHeroService } from '@services/recently-searched-hero.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-recent-searches',
   templateUrl: './recent-searches.component.html',
   styleUrls: ['./recent-searches.component.scss']
 })
-export class RecentSearchesComponent implements DoCheck {
+export class RecentSearchesComponent implements OnInit {
 
-  public recentSearches: ReadonlyArray<string>;
-
-  @Input() form: FormGroup<SearchForm>;
+  public recentSearches$: Observable<ReadonlyArray<string>>;
+  @Output() heroSelected: EventEmitter<string> = new EventEmitter<string>();
 
   constructor(
     private readonly recentlySearchedService: RecentlySearchedHeroService) {
   }
 
-  public ngDoCheck() {
-    this.getRecentSearches();
+  public recentHeroSelected(heroName: Readonly<string>): void {
+    this.heroSelected.emit(heroName);
   }
 
-  public selectRecentElement(heroName: Readonly<string>): void {
-    this.form.controls.searchField.setValue(heroName);
+  public ngOnInit(): void {
+    this.recentSearches$ = this.recentlySearchedService.heroes$;
   }
-  
-  private getRecentSearches(): void {
-    this.recentSearches = this.recentlySearchedService.getHeroes();
-  }
+
 }

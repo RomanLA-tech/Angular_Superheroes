@@ -17,10 +17,7 @@ export class HeroService {
 
   public getHeroes(): Observable<ReadonlyArray<Hero>> {
     return this.http.get<Readonly<HeroesDbResponse>>(this.getDbUrl())
-      .pipe(map((response) => {
-          return response.results;
-        })
-      );
+      .pipe(map((response) => response.results));
   }
 
   private getDbUrl(): Readonly<string> {

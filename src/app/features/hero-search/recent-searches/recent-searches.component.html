@@ -1,5 +1,5 @@
-<mat-chip-listbox *ngIf="recentSearches" class="recent-searches">
-  <mat-chip-option (click)="selectRecentElement(search)" *ngFor="let search of recentSearches">
+<mat-chip-listbox *ngIf="recentSearches$ | async" class="recent-searches">
+  <mat-chip-option (click)="recentHeroSelected(search)" *ngFor="let search of recentSearches$ | async">
     {{search}}
   </mat-chip-option>
 </mat-chip-listbox>

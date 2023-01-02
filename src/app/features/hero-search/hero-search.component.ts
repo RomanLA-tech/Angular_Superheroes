@@ -13,9 +13,9 @@ import { RecentlySearchedHeroService } from '@services/recently-searched-hero.se
   styleUrls: ['./hero-search.component.scss']
 })
 export class HeroSearchComponent implements OnInit, OnDestroy {
-  
+
   public selectedHero: Readonly<string>;
-  public heroes$: ReadonlyArray<Hero>;
+  public heroes: ReadonlyArray<Hero>;
   public searchForm: FormGroup<SearchForm>;
   public searchValue: Readonly<string>;
   private destroy$ = new Subject<void>();
@@ -44,6 +44,10 @@ export class HeroSearchComponent implements OnInit, OnDestroy {
     this.selectedHero = heroId;
   }
 
+  public onRecentHeroSelect(heroName: Readonly<string>): void {
+    this.searchForm.controls.searchField.setValue(heroName);
+  }
+
   public onSubmit(): void {
     if (this.searchForm.invalid) {
       return;
@@ -56,13 +60,13 @@ export class HeroSearchComponent implements OnInit, OnDestroy {
 
   private getHeroes(): void {
     this.heroService.getHeroes().pipe(takeUntil(this.destroy$))
-      .subscribe({
-        next: (heroes) => this.heroes$ = heroes
-      });
+      .subscribe((heroes) => this.heroes = heroes
+      );
   }
 
-  private addToRecentSearches(search: Readonly<string>): void {
-    this.recentlySearchedService.addHero(search);
+  private addToRecentSearches(searchValue: Readonly<string>): void {
+    this.recentlySearchedService.addHeroToLocalStorage(searchValue);
+    this.recentlySearchedService.heroes = this.recentlySearchedService.getHeroesFromLocalStorage();
   }
 
   private searchFormInit(): void {
