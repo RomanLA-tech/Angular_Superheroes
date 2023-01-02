@@ -15,7 +15,7 @@ import { UsersService } from '@services/user.service';
 })
 export class HeroSearchComponent implements OnInit, OnDestroy {
 
-  public selectedHero: Readonly<string>;
+  public selectedHeroId: Readonly<string>;
   public heroes: ReadonlyArray<Hero>;
   public searchForm: FormGroup<SearchForm>;
   public searchValue: Readonly<string>;
@@ -44,7 +44,7 @@ export class HeroSearchComponent implements OnInit, OnDestroy {
   }
 
   public selectHero(hero: Readonly<Hero>): void {
-    this.selectedHero = hero.id;
+    this.selectedHeroId = hero.id;
     this.userService.addUserHeroToLocalStorage(hero);
     this.userService.userHeroes = this.userService.getUserHeroesFromLocalStorage();
   }

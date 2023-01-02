@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Hero } from '@interfaces/hero.interface';
 import { BehaviorSubject, Observable } from 'rxjs';
+
+import { Hero } from '@interfaces/hero.interface';
 
 @Injectable({providedIn: 'root'})
 export class UsersService {

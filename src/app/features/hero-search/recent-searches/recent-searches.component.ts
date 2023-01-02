@@ -10,6 +10,7 @@ import { Observable } from 'rxjs';
 export class RecentSearchesComponent implements OnInit {
 
   public recentSearches$: Observable<ReadonlyArray<string>>;
+
   @Output() heroSelected: EventEmitter<string> = new EventEmitter<string>();
 
   constructor(
