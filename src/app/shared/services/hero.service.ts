@@ -23,5 +23,4 @@ export class HeroService {
   private getDbUrl(): Readonly<string> {
     return `https://halushkovdmytro.github.io/JSON-api/fake-data.json`;
   }
-
 }
