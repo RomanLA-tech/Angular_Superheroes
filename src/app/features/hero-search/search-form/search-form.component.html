@@ -1,0 +1,19 @@
+<form [formGroup]="form">
+
+  <div class="search-container">
+
+    <ng-content></ng-content>
+
+    <app-search-form-input
+      [formControlName]="'searchField'"
+      ngDefaultControl>
+    </app-search-form-input>
+
+    <ng-content select="button"></ng-content>
+  </div>
+
+  <mat-error *ngIf="form.dirty && form.invalid">
+    Invalid input value
+  </mat-error>
+
+</form>

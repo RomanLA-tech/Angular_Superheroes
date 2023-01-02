@@ -1,0 +1,37 @@
+.alphabet-selection {
+  display: inline-flex;
+  align-items: center;
+  background-color: #9C27B0;
+  border-radius: 50%;
+
+  .selected-letter, .letter {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+
+    &:hover {
+      background-color: #ccc;
+    }
+
+    &.hovered {
+      background-color: #999;
+    }
+  }
+
+  .letter-list {
+    display: flex;
+    position: absolute;
+    max-width: 20vw;
+    border-radius: 1rem;
+    flex-wrap: wrap;
+    margin-left: 10px;
+    z-index: 100;
+    background-color: #999999;
+  }
+}

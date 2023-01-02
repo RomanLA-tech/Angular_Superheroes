@@ -1,0 +1,25 @@
+<div class="hero-search">
+
+  <app-search-form [form]="searchForm">
+    <app-alphabet-selection
+      (letterSelected)="selectLetter($event)"
+    ></app-alphabet-selection>
+
+    <button (click)="onSubmit()" color="primary" mat-raised-button>
+      Search
+    </button>
+  </app-search-form>
+
+  <app-recent-searches [recentSearches]="recentSearches"></app-recent-searches>
+
+  <div *ngIf="heroes">
+    <ng-container *ngFor="let hero of heroes">
+      <app-hero-card
+        (heroSelected)="selectHero($event)"
+        [hero]="hero!"
+        [selectedHeroId]="selectedHero"
+      >
+      </app-hero-card>
+    </ng-container>
+  </div>
+</div>

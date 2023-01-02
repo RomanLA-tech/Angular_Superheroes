@@ -1,6 +1,14 @@
 <header>
   <mat-toolbar color="primary">
-    <span>Superheros</span>
+    <span>Superheroes</span>
+    <span class="spacer"></span>
+    <button *ngIf="isAuth"
+            mat-icon-button
+            (click)="logout()"
+            aria-label="Logout icon-button with logout icon"
+    >
+      <mat-icon>logout</mat-icon>
+    </button>
   </mat-toolbar>
 </header>
 

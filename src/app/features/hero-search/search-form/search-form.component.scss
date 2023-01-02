@@ -1,0 +1,19 @@
+form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1rem;
+
+  .search-container {
+    display: inline-flex;
+    flex-direction: row;
+    align-items: baseline;
+    gap: 1rem;
+    justify-content: space-evenly;
+    width: 40vw;
+  }
+
+}
+
+
