@@ -1,11 +1,10 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Component } from '@angular/core';
 import { NgControl } from '@angular/forms';
 
 @Component({
   selector: 'app-search-form-input',
   templateUrl: './search-form-input.component.html',
-  styleUrls: ['./search-form-input.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['./search-form-input.component.scss']
 })
 export class SearchFormInputComponent {
 

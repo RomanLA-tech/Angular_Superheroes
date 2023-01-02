@@ -47,8 +47,7 @@ export class LoginFormComponent implements OnInit, OnDestroy {
     }
     const loginFormValue: LoginFormValue = this.loginForm.getRawValue();
     const user: Readonly<User> = {
-      email: loginFormValue.email,
-      password: loginFormValue.password,
+      ...loginFormValue,
       username: 'Incognito'
     };
     this.onSuccessfulLoginActions(user);
@@ -60,9 +59,7 @@ export class LoginFormComponent implements OnInit, OnDestroy {
     }
     const registerFormValue: RegisterFormValue = this.registerForm.getRawValue();
     const user: User = {
-      email: registerFormValue.email,
-      password: registerFormValue.password,
-      username: registerFormValue.username
+      ...registerFormValue
     };
     this.onSuccessfulLoginActions(user);
   }

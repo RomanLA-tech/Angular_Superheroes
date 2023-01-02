@@ -1,35 +1,43 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Subject, takeUntil } from 'rxjs';
 
 import { Hero } from '@shared/interfaces/hero.interface';
 import { HeroService } from '@services/hero.service';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { SearchForm } from '@interfaces/hero-search-form.interface';
-import { HEROES } from '@utils/constants';
+import { RecentlySearchedHeroService } from '@services/recently-searched-hero.service';
 
 @Component({
   selector: 'app-hero-search',
   templateUrl: './hero-search.component.html',
   styleUrls: ['./hero-search.component.scss']
 })
-export class HeroSearchComponent implements OnInit {
-
-  public recentSearches: Readonly<string[]>;
+export class HeroSearchComponent implements OnInit, OnDestroy {
+  
   public selectedHero: Readonly<string>;
-  public heroes: ReadonlyArray<Hero>;
+  public heroes$: ReadonlyArray<Hero>;
   public searchForm: FormGroup<SearchForm>;
+  public searchValue: Readonly<string>;
+  private destroy$ = new Subject<void>();
 
-  constructor(private readonly heroService: HeroService) {
+  constructor(
+    private readonly heroService: HeroService,
+    private readonly recentlySearchedService: RecentlySearchedHeroService) {
   }
 
   public ngOnInit(): void {
-    this.getHeroes();
     this.searchFormInit();
+    this.getHeroes();
   }
 
-  public search(value: Readonly<string>): void {
+  public ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   public selectLetter(letter: Readonly<string>): void {
+    this.searchForm.controls.searchField.setValue(letter);
+    this.searchValue = this.searchForm.controls.searchField.value;
   }
 
   public selectHero(heroId: Readonly<string>): void {
@@ -40,18 +48,21 @@ export class HeroSearchComponent implements OnInit {
     if (this.searchForm.invalid) {
       return;
     }
-    console.log(this.searchForm);
+    const searchValue = this.searchForm.controls.searchField.getRawValue();
+    this.searchValue = searchValue;
+    this.getHeroes();
+    this.addToRecentSearches(searchValue);
   }
 
-  private getHeroes() {
-    this.heroes = HEROES;
+  private getHeroes(): void {
+    this.heroService.getHeroes().pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: (heroes) => this.heroes$ = heroes
+      });
   }
 
-  private getRecentSearches(): void {
-    this.recentSearches = ['Batman', 'Joker'];
-  }
-
-  private addToRecentSearches(search: string): void {
+  private addToRecentSearches(search: Readonly<string>): void {
+    this.recentlySearchedService.addHero(search);
   }
 
   private searchFormInit(): void {
@@ -59,10 +70,8 @@ export class HeroSearchComponent implements OnInit {
       searchField: new FormControl<string>('', {
         nonNullable: true, validators: [Validators.required,
           Validators.pattern('[a-zA-Z]*'),
-          Validators.maxLength(10),
-          Validators.minLength(2)]
+          Validators.maxLength(20)]
       })
     });
-    this.getRecentSearches();
   }
 }
