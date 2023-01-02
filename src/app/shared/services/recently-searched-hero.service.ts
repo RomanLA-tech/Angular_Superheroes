@@ -10,7 +10,7 @@ export class RecentlySearchedHeroService {
     return this.heroesStream.asObservable();
   }
 
-  public get heroes() {
+  public get heroes(): ReadonlyArray<string> {
     return this.heroesStream.value;
   }
 

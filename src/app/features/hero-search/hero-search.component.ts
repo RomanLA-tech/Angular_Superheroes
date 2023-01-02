@@ -6,6 +6,7 @@ import { Hero } from '@shared/interfaces/hero.interface';
 import { HeroService } from '@services/hero.service';
 import { SearchForm } from '@interfaces/hero-search-form.interface';
 import { RecentlySearchedHeroService } from '@services/recently-searched-hero.service';
+import { UsersService } from '@services/user.service';
 
 @Component({
   selector: 'app-hero-search',
@@ -22,7 +23,9 @@ export class HeroSearchComponent implements OnInit, OnDestroy {
 
   constructor(
     private readonly heroService: HeroService,
-    private readonly recentlySearchedService: RecentlySearchedHeroService) {
+    private readonly recentlySearchedService: RecentlySearchedHeroService,
+    private readonly userService: UsersService
+  ) {
   }
 
   public ngOnInit(): void {
@@ -40,8 +43,10 @@ export class HeroSearchComponent implements OnInit, OnDestroy {
     this.searchValue = this.searchForm.controls.searchField.value;
   }
 
-  public selectHero(heroId: Readonly<string>): void {
-    this.selectedHero = heroId;
+  public selectHero(hero: Readonly<Hero>): void {
+    this.selectedHero = hero.id;
+    this.userService.addUserHeroToLocalStorage(hero);
+    this.userService.userHeroes = this.userService.getUserHeroesFromLocalStorage();
   }
 
   public onRecentHeroSelect(heroName: Readonly<string>): void {
