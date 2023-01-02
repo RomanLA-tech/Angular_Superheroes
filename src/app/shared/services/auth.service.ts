@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-
-import { User } from '@shared/interfaces';
+import { User } from '@interfaces/user.interface';
 
 @Injectable({providedIn: 'root'})
 export class AuthService {
