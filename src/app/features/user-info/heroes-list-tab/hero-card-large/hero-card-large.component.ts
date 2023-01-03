@@ -1,4 +1,5 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+
 import { Hero } from '@interfaces/hero.interface';
 
 @Component({
@@ -9,5 +10,10 @@ import { Hero } from '@interfaces/hero.interface';
 export class HeroCardLargeComponent {
 
   @Input() public hero: Readonly<Hero>;
+  @Input() public selectedHeroId: Readonly<string>;
+  @Output() public heroSelected = new EventEmitter<Hero>();
 
+  public setSelectedHero() {
+    this.heroSelected.emit(this.hero);
+  }
 }

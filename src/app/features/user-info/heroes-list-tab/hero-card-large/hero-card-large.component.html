@@ -18,7 +18,11 @@
       <h4>Strength: {{hero.powerstats.strength}}</h4>
     </div>
     <mat-card-actions>
-      <button>Select</button>
+      <button (click)="setSelectedHero()"
+              [disabled]="hero.id === selectedHeroId"
+              mat-stroked-button>
+        Select hero
+      </button>
     </mat-card-actions>
   </mat-card-content>
 </mat-card>

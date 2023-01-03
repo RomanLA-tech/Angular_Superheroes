@@ -29,9 +29,9 @@ export class HeroSearchComponent implements OnInit, OnDestroy {
   }
 
   public ngOnInit(): void {
-    this.selectedHeroIdInit();
     this.searchFormInit();
     this.getHeroes();
+    this.selectedHeroIdInit();
   }
 
   public ngOnDestroy(): void {

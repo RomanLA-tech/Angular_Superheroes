@@ -1,5 +1,9 @@
 <ng-container *ngFor="let hero of userHeroes$ | async">
-  <app-hero-card-large [hero]="hero"></app-hero-card-large>
+  <app-hero-card-large
+    (heroSelected)="selectHero($event)"
+    [hero]="hero"
+    [selectedHeroId]="(selectedHeroId$ | async) ?? ''">
+  </app-hero-card-large>
 </ng-container>
 <div class="add-button-container">
   <button [routerLink]="['/search']" aria-label="icon button with a add icon" color="primary" mat-fab>

@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
+
 import { Hero } from '@interfaces/hero.interface';
 import { UserService } from '@services/user.service';
 
@@ -8,15 +9,15 @@ import { UserService } from '@services/user.service';
   templateUrl: './heroes-list-tab.component.html',
   styleUrls: ['./heroes-list-tab.component.scss']
 })
-export class HeroesListTabComponent implements OnInit {
+export class HeroesListTabComponent {
 
-  public userHeroes$: Observable<ReadonlyArray<Hero>>;
+  public selectedHeroId$: Observable<Readonly<string>> = this.userService.userSelectedHeroId$;
+  public userHeroes$: Observable<ReadonlyArray<Hero>> = this.userService.userHeroes$;
 
   constructor(private readonly userService: UserService) {
   }
 
-  public ngOnInit(): void {
-    this.userHeroes$ = this.userService.userHeroes$;
+  public selectHero(hero: Readonly<Hero>): void {
+    this.userService.userSelectedHeroId = hero.id;
   }
-
 }

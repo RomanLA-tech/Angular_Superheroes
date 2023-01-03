@@ -1,6 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { RecentlySearchedHeroService } from '@services/recently-searched-hero.service';
 import { Observable } from 'rxjs';
+
+import { RecentlySearchedHeroService } from '@services/recently-searched-hero.service';
 
 @Component({
   selector: 'app-recent-searches',

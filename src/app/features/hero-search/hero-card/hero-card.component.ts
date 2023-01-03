@@ -11,9 +11,9 @@ import { Hero } from '@interfaces/hero.interface';
 export class HeroCardComponent {
 
   @Input() public hero: Readonly<Hero>;
-  @Input() public selectedHeroId: string;
+  @Input() public selectedHeroId: Readonly<string>;
   @Output() public heroSelected = new EventEmitter<Hero>();
-
+  
   public setSelectedHero() {
     this.heroSelected.emit(this.hero);
   }
