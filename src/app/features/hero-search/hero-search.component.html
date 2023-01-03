@@ -10,16 +10,18 @@
     </button>
   </app-search-form>
 
-  <app-recent-searches [recentSearches]="recentSearches"></app-recent-searches>
+  <app-recent-searches (heroSelected)="onRecentHeroSelect($event)"></app-recent-searches>
 
-  <div *ngIf="heroes">
-    <ng-container *ngFor="let hero of heroes">
+  <div *ngIf="heroes; else loading">
+    <ng-container *ngFor="let hero of heroes | searchHero:searchValue">
       <app-hero-card
         (heroSelected)="selectHero($event)"
-        [hero]="hero!"
-        [selectedHeroId]="selectedHero"
+        [hero]="hero"
+        [selectedHeroId]="selectedHeroId"
       >
       </app-hero-card>
     </ng-container>
   </div>
 </div>
+
+<ng-template #loading><p>Please wait...</p></ng-template>

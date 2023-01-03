@@ -12,10 +12,10 @@ export class HeroCardComponent {
 
   @Input() public hero: Readonly<Hero>;
   @Input() public selectedHeroId: Readonly<string>;
-  @Output() public heroSelected = new EventEmitter<string>();
+  @Output() public heroSelected = new EventEmitter<Hero>();
 
   public setSelectedHero() {
-    this.heroSelected.emit(this.hero.id);
+    this.heroSelected.emit(this.hero);
   }
 }
 

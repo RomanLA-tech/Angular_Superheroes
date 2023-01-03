@@ -2,17 +2,17 @@
   <mat-toolbar color="primary">
     <span>Superheroes</span>
     <span class="spacer"></span>
-    <button *ngIf="isAuth"
-            mat-icon-button
-            (click)="logout()"
+    <button (click)="logout()"
+            *ngIf="isAuth$ | async"
             aria-label="Logout icon-button with logout icon"
+            mat-icon-button
     >
       <mat-icon>logout</mat-icon>
     </button>
   </mat-toolbar>
 </header>
 
-<div layout="column" flex class="content">
+<div class="content" flex layout="column">
   <ng-content></ng-content>
 </div>
 

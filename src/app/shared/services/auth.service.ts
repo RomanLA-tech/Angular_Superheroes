@@ -1,9 +1,23 @@
 import { Injectable } from '@angular/core';
 import { User } from '@interfaces/user.interface';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({providedIn: 'root'})
 export class AuthService {
-  private isLogged = false;
+
+  private readonly isLoggedStream = new BehaviorSubject<boolean>(false);
+
+  public get isLogged$(): Observable<boolean> {
+    return this.isLoggedStream.asObservable();
+  }
+
+  public get isLogged(): Readonly<boolean> {
+    return this.isLoggedStream.value;
+  }
+
+  public set isLogged(isAuth: Readonly<boolean>) {
+    this.isLoggedStream.next(isAuth);
+  }
 
   public login(usersData: Readonly<User>): void {
     this.authUserInit(usersData);

@@ -14,12 +14,15 @@ import { HeroCardComponent } from './hero-card/hero-card.component';
 import { SearchFormInputComponent } from './search-form/search-form-input/search-form-input.component';
 import { SearchFormComponent } from './search-form/search-form.component';
 import { RecentSearchesComponent } from './recent-searches/recent-searches.component';
+import { SearchHeroPipe } from '@pipes/search-hero.pipe';
+import { RecentlySearchedHeroService } from '@services/recently-searched-hero.service';
 
 @NgModule({
   declarations: [
     HeroSearchComponent,
     AlphabetSelectionComponent,
     HeroCardComponent,
+    SearchHeroPipe,
     SearchFormInputComponent,
     SearchFormComponent,
     RecentSearchesComponent
@@ -36,7 +39,8 @@ import { RecentSearchesComponent } from './recent-searches/recent-searches.compo
       path: '', component: HeroSearchComponent
     }
     ])
-  ]
+  ],
+  providers: [RecentlySearchedHeroService]
 })
 export class HeroSearchModule {
 }
