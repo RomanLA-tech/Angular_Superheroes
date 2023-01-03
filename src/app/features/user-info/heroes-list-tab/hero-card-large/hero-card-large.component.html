@@ -5,9 +5,9 @@
 
   <mat-card-content class="card-large__content">
     <div class="hero-avatar" mat-card-avatar>
-      <img alt="{{hero.name}}"
-           mat-card-image
-           src="{{hero.image}}">
+      <img [alt]="hero.name"
+           [src]="hero.image"
+           mat-card-image>
     </div>
     <div class="hero-stats">
       <h4>Power: {{hero.powerstats.power}}</h4>

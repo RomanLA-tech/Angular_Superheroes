@@ -6,7 +6,7 @@ import { Hero } from '@interfaces/hero.interface';
 @Injectable({providedIn: 'root'})
 export class UserService {
 
-  private readonly userSelectedHeroIdStream = new BehaviorSubject<Readonly<string>>(this.getUserHeroesFromLocalStorage()[0].id);
+  private readonly userSelectedHeroIdStream = new BehaviorSubject<Readonly<string>>(this.getUserHeroesFromLocalStorage()[0].id || '0');
 
   private readonly userHeroesStream = new BehaviorSubject<ReadonlyArray<Hero>>(this.getUserHeroesFromLocalStorage());
 
