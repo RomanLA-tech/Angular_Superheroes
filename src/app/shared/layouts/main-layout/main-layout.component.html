@@ -2,6 +2,7 @@
   <mat-toolbar color="primary">
     <span>Superheroes</span>
     <span class="spacer"></span>
+    <button [routerLink]="['/user-info']" mat-button>User info</button>
     <button (click)="logout()"
             *ngIf="isAuth$ | async"
             aria-label="Logout icon-button with logout icon"
