@@ -1,0 +1,28 @@
+<mat-card class="card-large">
+  <mat-card-header class="card-large__header">
+    <h2>{{hero.name}}</h2>
+  </mat-card-header>
+
+  <mat-card-content class="card-large__content">
+    <div class="hero-avatar" mat-card-avatar>
+      <img [alt]="hero.name"
+           [src]="hero.image"
+           mat-card-image>
+    </div>
+    <div class="hero-stats">
+      <h4>Power: {{hero.powerstats.power}}</h4>
+      <h4>Durability: {{hero.powerstats.durability}}</h4>
+      <h4>Intelligence: {{hero.powerstats.intelligence}}</h4>
+      <h4>Combat: {{hero.powerstats.combat}}</h4>
+      <h4>Speed: {{hero.powerstats.speed}}</h4>
+      <h4>Strength: {{hero.powerstats.strength}}</h4>
+    </div>
+    <mat-card-actions>
+      <button (click)="setSelectedHero()"
+              [disabled]="hero.id === selectedHeroId"
+              mat-stroked-button>
+        Select hero
+      </button>
+    </mat-card-actions>
+  </mat-card-content>
+</mat-card>

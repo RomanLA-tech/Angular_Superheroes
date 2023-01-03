@@ -6,7 +6,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 
 import { MainLayoutComponent } from '@layouts/main-layout/main-layout.component';
-import { RouterLink } from '@angular/router';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 
 @NgModule({
   declarations: [MainLayoutComponent],
@@ -20,7 +20,8 @@ import { RouterLink } from '@angular/router';
     MatToolbarModule,
     MatIconModule,
     MatButtonModule,
-    RouterLink
+    RouterLink,
+    RouterLinkActive
   ]
 })
 export class MainLayoutModule {

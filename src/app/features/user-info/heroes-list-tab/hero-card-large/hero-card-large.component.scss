@@ -1,0 +1,46 @@
+.card-large {
+  display: flex;
+  width: 60vw;
+  justify-content: center;
+  flex-direction: column;
+  margin-top: 2rem;
+
+  h2 {
+    width: 100%;
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+
+  .card-large__content {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .hero-avatar {
+    width: 150px;
+    height: 150px;
+    margin: 0 auto;
+    overflow: hidden;
+    border-radius: 20%;
+    transform: translateY(-25px);
+
+    img {
+      width: 100%;
+      height: auto;
+    }
+  }
+
+  .hero-stats {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 60%;
+    height: 20vh;
+    justify-content: space-around;
+  }
+}
+
+
+
+

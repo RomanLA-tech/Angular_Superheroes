@@ -1,1 +1,11 @@
-<p>heroes-list works!</p>
+<app-hero-card-large
+  (heroSelected)="selectHero($event)"
+  *ngFor="let hero of userHeroes$ | async"
+  [hero]="hero"
+  [selectedHeroId]="(selectedHeroId$ | async) ?? ''">
+</app-hero-card-large>
+<div class="add-button-container">
+  <button [routerLink]="['/search']" aria-label="icon button with a add icon" color="primary" mat-fab>
+    <mat-icon>add</mat-icon>
+  </button>
+</div>
