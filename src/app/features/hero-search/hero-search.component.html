@@ -17,7 +17,7 @@
       <app-hero-card
         (heroSelected)="selectHero($event)"
         [hero]="hero"
-        [selectedHeroId]="selectedHeroId"
+        [selectedHeroId]="selectedHeroId$ | async"
       >
       </app-hero-card>
     </ng-container>

@@ -6,13 +6,18 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { HeroesListTabComponent } from './heroes-list-tab/heroes-list-tab.component';
 import { HistoryTabComponent } from './history-tab/history-tab.component';
 import { PowerUpsTabComponent } from './power-ups-tab/power-ups-tab.component';
+import { HeroCardLargeComponent } from './heroes-list-tab/hero-card-large/hero-card-large.component';
+import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [
     UserInfoComponent,
     HeroesListTabComponent,
     HistoryTabComponent,
-    PowerUpsTabComponent
+    PowerUpsTabComponent,
+    HeroCardLargeComponent
   ],
   imports: [
     CommonModule,
@@ -20,7 +25,10 @@ import { PowerUpsTabComponent } from './power-ups-tab/power-ups-tab.component';
       path: '', component: UserInfoComponent
     }
     ]),
-    MatTabsModule
+    MatTabsModule,
+    MatCardModule,
+    MatIconModule,
+    MatButtonModule
   ]
 })
 export class UserInfoModule {

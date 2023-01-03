@@ -50,6 +50,7 @@ export class LoginFormComponent implements OnInit, OnDestroy {
       ...loginFormValue,
       username: 'Incognito'
     };
+    this.loginForm.reset();
     this.onSuccessfulLoginActions(user);
   }
 
@@ -61,6 +62,7 @@ export class LoginFormComponent implements OnInit, OnDestroy {
     const user: User = {
       ...registerFormValue
     };
+    this.registerForm.reset();
     this.onSuccessfulLoginActions(user);
   }
 
@@ -70,7 +72,6 @@ export class LoginFormComponent implements OnInit, OnDestroy {
 
   private onSuccessfulLoginActions(user: Readonly<User>) {
     this.auth.login(user);
-    this.loginForm.reset();
     this.router.navigate(['search']);
   }
 

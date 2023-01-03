@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 
-import { Hero } from '@shared/interfaces/hero.interface';
+import { Hero } from '@interfaces/hero.interface';
 
 @Component({
   selector: 'app-hero-card',
@@ -11,7 +11,7 @@ import { Hero } from '@shared/interfaces/hero.interface';
 export class HeroCardComponent {
 
   @Input() public hero: Readonly<Hero>;
-  @Input() public selectedHeroId: Readonly<string>;
+  @Input() public selectedHeroId: string;
   @Output() public heroSelected = new EventEmitter<Hero>();
 
   public setSelectedHero() {

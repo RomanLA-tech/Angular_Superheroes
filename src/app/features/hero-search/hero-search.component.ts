@@ -1,12 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Subject, takeUntil } from 'rxjs';
+import { Observable, Subject, takeUntil } from 'rxjs';
 
 import { Hero } from '@shared/interfaces/hero.interface';
 import { HeroService } from '@services/hero.service';
 import { SearchForm } from '@interfaces/hero-search-form.interface';
 import { RecentlySearchedHeroService } from '@services/recently-searched-hero.service';
-import { UsersService } from '@services/user.service';
+import { UserService } from '@services/user.service';
 
 @Component({
   selector: 'app-hero-search',
@@ -15,7 +15,7 @@ import { UsersService } from '@services/user.service';
 })
 export class HeroSearchComponent implements OnInit, OnDestroy {
 
-  public selectedHeroId: Readonly<string>;
+  public selectedHeroId$: Observable<Readonly<string>>;
   public heroes: ReadonlyArray<Hero>;
   public searchForm: FormGroup<SearchForm>;
   public searchValue: Readonly<string>;
@@ -24,11 +24,12 @@ export class HeroSearchComponent implements OnInit, OnDestroy {
   constructor(
     private readonly heroService: HeroService,
     private readonly recentlySearchedService: RecentlySearchedHeroService,
-    private readonly userService: UsersService
+    private readonly userService: UserService
   ) {
   }
 
   public ngOnInit(): void {
+    this.selectedHeroIdInit();
     this.searchFormInit();
     this.getHeroes();
   }
@@ -44,7 +45,7 @@ export class HeroSearchComponent implements OnInit, OnDestroy {
   }
 
   public selectHero(hero: Readonly<Hero>): void {
-    this.selectedHeroId = hero.id;
+    this.userService.userSelectedHeroId = hero.id;
     this.userService.addUserHeroToLocalStorage(hero);
     this.userService.userHeroes = this.userService.getUserHeroesFromLocalStorage();
   }
@@ -61,6 +62,10 @@ export class HeroSearchComponent implements OnInit, OnDestroy {
     this.searchValue = searchValue;
     this.getHeroes();
     this.addToRecentSearches(searchValue);
+  }
+
+  private selectedHeroIdInit(): void {
+    this.selectedHeroId$ = this.userService.userSelectedHeroId$;
   }
 
   private getHeroes(): void {

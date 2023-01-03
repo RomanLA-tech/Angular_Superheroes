@@ -4,9 +4,23 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { Hero } from '@interfaces/hero.interface';
 
 @Injectable({providedIn: 'root'})
-export class UsersService {
+export class UserService {
+
+  private readonly userSelectedHeroIdStream = new BehaviorSubject<Readonly<string>>(this.getUserHeroesFromLocalStorage()[0].id);
 
   private readonly userHeroesStream = new BehaviorSubject<ReadonlyArray<Hero>>(this.getUserHeroesFromLocalStorage());
+
+  public get userSelectedHeroId$(): Observable<Readonly<string>> {
+    return this.userSelectedHeroIdStream.asObservable();
+  }
+
+  public get userSelectedHeroId(): Readonly<string> {
+    return this.userSelectedHeroIdStream.value;
+  }
+
+  public set userSelectedHeroId(heroId: Readonly<string>) {
+    this.userSelectedHeroIdStream.next(heroId);
+  }
 
   public get userHeroes$(): Observable<ReadonlyArray<Hero>> {
     return this.userHeroesStream.asObservable();
