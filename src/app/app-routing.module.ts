@@ -11,7 +11,13 @@ const routes: Routes = [
     path: 'search',
     canActivate: [AuthGuard],
     loadChildren: () => import('./features/hero-search/hero-search.module').then(m => m.HeroSearchModule)
+  },
+  {
+    path: 'user-info',
+    canActivate: [AuthGuard],
+    loadChildren: () => import('./features/user-info/user-info.module').then(m => m.UserInfoModule)
   }
+
 ];
 
 @NgModule({
