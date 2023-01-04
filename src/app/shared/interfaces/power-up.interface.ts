@@ -1,8 +1,8 @@
 export interface PowerUp {
-  title: string;
-  powerStatsName: string;
-  powerStatsValue: string;
-  usesLeft: number;
-  image: string;
-  selected: boolean;
+  title: Readonly<string>;
+  powerStatsName: Readonly<string>;
+  powerStatsValue: Readonly<string>;
+  usesLeft: Readonly<number>;
+  image: Readonly<string>;
+  selected: Readonly<boolean>;
 }
