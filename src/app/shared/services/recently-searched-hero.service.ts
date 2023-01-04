@@ -18,7 +18,7 @@ export class RecentlySearchedHeroService {
     this.heroesStream.next(heroes);
   }
 
-  public addHeroToLocalStorage(heroName: string): void {
+  public addHeroToLocalStorage(heroName: Readonly<string>): void {
     const oldState = this.getHeroesFromLocalStorage();
     const newState = new Set([heroName, ...oldState]);
     localStorage.setItem('recently-searched', JSON.stringify([...newState]));

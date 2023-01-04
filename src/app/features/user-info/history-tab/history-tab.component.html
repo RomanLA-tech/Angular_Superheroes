@@ -1,1 +1,40 @@
-<p>history works!</p>
+<div class="container">
+  <table (matSortChange)="announceSortChange($event)"
+         [dataSource]="dataSource"
+         class="mat-elevation-z8"
+         mat-table matSort>
+
+    <ng-container matColumnDef="date">
+      <th *matHeaderCellDef
+          mat-header-cell mat-sort-header="date"
+          sortActionDescription="Sort by date">
+        Date
+      </th>
+      <td *matCellDef="let element" mat-cell> {{element.date | date:"short"}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="hero">
+      <th *matHeaderCellDef mat-header-cell mat-sort-header="hero" sortActionDescription="Sort by hero">
+        Hero
+      </th>
+      <td *matCellDef="let element" mat-cell> {{element.hero}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="opponent">
+      <th *matHeaderCellDef mat-header-cell mat-sort-header="opponent" sortActionDescription="Sort by opponent">
+        Opponent
+      </th>
+      <td *matCellDef="let element" mat-cell> {{element.opponent}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="result">
+      <th *matHeaderCellDef mat-header-cell mat-sort-header="result" sortActionDescription="Sort by result">
+        Result
+      </th>
+      <td *matCellDef="let element" mat-cell> {{element.result}} </td>
+    </ng-container>
+
+    <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
+    <tr *matRowDef="let row; columns: displayedColumns;" mat-row></tr>
+  </table>
+</div>
