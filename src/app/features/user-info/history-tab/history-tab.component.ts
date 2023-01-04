@@ -28,11 +28,9 @@ export class HistoryTabComponent implements AfterViewInit {
   }
 
   public announceSortChange(sortState: Sort): void {
-    if (sortState.direction) {
-      this.liveAnnouncer.announce(`Sorted ${sortState.direction}ending`);
-    } else {
-      this.liveAnnouncer.announce('Sorting cleared');
-    }
+    (sortState.direction)
+      ? this.liveAnnouncer.announce(`Sorted ${sortState.direction}ending`)
+      : this.liveAnnouncer.announce('Sorting cleared');
   }
 }
 
