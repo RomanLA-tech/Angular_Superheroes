@@ -16,6 +16,11 @@ const routes: Routes = [
     path: 'user-info',
     canActivate: [AuthGuard],
     loadChildren: () => import('./features/user-info/user-info.module').then(m => m.UserInfoModule)
+  },
+  {
+    path: 'hero/:id',
+    canActivate: [AuthGuard],
+    loadChildren: () => import('./features/hero-info/hero-info.module').then(m => m.HeroInfoModule)
   }
 
 ];

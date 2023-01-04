@@ -1,0 +1,68 @@
+<mat-card *ngIf="hero; else loading" class="container">
+
+  <div class="left-container">
+    <mat-card-title class="title">
+      {{hero.name}}
+    </mat-card-title>
+
+    <div class="hero-avatar" mat-card-avatar>
+      <img [alt]="hero.name"
+           [src]="hero.image"
+           mat-card-image>
+    </div>
+  </div>
+
+  <mat-card-content>
+    <div class="info-block">
+      <h3>Power stats</h3>
+      <div>Power: {{hero.powerstats.power}}</div>
+      <div>Durability: {{hero.powerstats.durability}}</div>
+      <div>Intelligence: {{hero.powerstats.intelligence}}</div>
+      <div>Strength: {{hero.powerstats.strength}}</div>
+      <div>Speed: {{hero.powerstats.speed}}</div>
+      <div>Combat: {{hero.powerstats.combat}}</div>
+    </div>
+
+    <div class="info-block">
+      <h3>Biography</h3>
+      <p>Full name: {{hero.biography["full-name"]}}</p>
+      <p>Place of birth: {{hero.biography["place-of-birth"]}}</p>
+      <p>Alter egos: {{hero.biography["alter-egos"]}}</p>
+      <p>Alignment: {{hero.biography.alignment}}</p>
+    </div>
+
+    <div class="info-block">
+      <h3>Appearance</h3>
+      <p>Gender: {{hero.appearance.gender}}</p>
+      <p>Race: {{hero.appearance.race}}</p>
+      <p>Height: {{hero.appearance.height}}</p>
+      <p>Weight: {{hero.appearance.weight}}</p>
+    </div>
+
+    <div class="info-block">
+      <h3>Work</h3>
+      <p>Base: {{hero.work.base}}</p>
+      <p>Occupations: {{hero.work.occupations}}</p>
+    </div>
+
+    <div class="info-block">
+      <h3>Connections</h3>
+      <p>Relatives: {{hero.connections.relatives}}</p>
+    </div>
+
+    <mat-card-actions>
+      <button (click)="selectHero()"
+              [disabled]="hero.id === (selectedHeroId$ | async)"
+              class="action-btn"
+              color="primary"
+              mat-raised-button
+      >
+        Select Hero
+      </button>
+    </mat-card-actions>
+  </mat-card-content>
+</mat-card>
+
+<ng-template #loading>
+  <mat-spinner></mat-spinner>
+</ng-template>
