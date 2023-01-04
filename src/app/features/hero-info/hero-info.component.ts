@@ -12,8 +12,8 @@ import { UserService } from '@services/user.service';
 })
 export class HeroInfoComponent implements OnInit, OnDestroy {
 
+  public heroId: Readonly<string> = this.route.snapshot.paramMap.get('id')!;
   public selectedHeroId$: Observable<Readonly<string>>;
-  public heroId: Readonly<string>;
   public hero: Readonly<Hero>;
   private destroy$ = new Subject<void>();
 
@@ -25,7 +25,6 @@ export class HeroInfoComponent implements OnInit, OnDestroy {
   }
 
   public ngOnInit(): void {
-    this.getHeroIdFromQuery();
     this.getHero();
   }
 
@@ -37,10 +36,6 @@ export class HeroInfoComponent implements OnInit, OnDestroy {
   public selectHero(): void {
     this.userService.userSelectedHeroId = this.hero.id;
     this.userService.addUserHeroToLocalStorage(this.hero);
-  }
-
-  private getHeroIdFromQuery(): void {
-    this.heroId = this.route.snapshot.paramMap.get('id')!;
   }
 
   private getHero(): void {
