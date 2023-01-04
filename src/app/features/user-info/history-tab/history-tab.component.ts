@@ -23,7 +23,7 @@ export class HistoryTabComponent implements AfterViewInit {
     private readonly liveAnnouncer: LiveAnnouncer) {
   }
 
-  public ngAfterViewInit() {
+  public ngAfterViewInit(): void {
     this.dataSource.sort = this.sort;
   }
 

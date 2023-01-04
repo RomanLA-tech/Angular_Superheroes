@@ -13,6 +13,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
+import { PowerUpCardComponent } from './power-ups-tab/power-up-card/power-up-card.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { MatSortModule } from '@angular/material/sort';
     HeroesListTabComponent,
     HistoryTabComponent,
     PowerUpsTabComponent,
-    HeroCardLargeComponent
+    HeroCardLargeComponent,
+    PowerUpCardComponent
   ],
   imports: [
     CommonModule,

@@ -1,0 +1,26 @@
+<mat-card class="card-container">
+  <mat-card-header>
+    <h2>{{powerUp.title}}</h2>
+  </mat-card-header>
+
+  <mat-card-content class="card__content">
+    <div class="image-container" mat-card-avatar>
+      <img [alt]="powerUp.title"
+           [src]="powerUp.image"
+           mat-card-image>
+    </div>
+    <div>
+      <h4>Stat: {{powerUp.powerStatsName}}</h4>
+      <h4>value: {{powerUp.powerStatsValue}}</h4>
+      <h4>Uses left: {{powerUp.usesLeft}}</h4>
+    </div>
+    <mat-card-actions>
+      <button (click)="setSelectedPowerUp()"
+              [disabled]="activePowerUp.title === powerUp.title"
+              class="action-button"
+              mat-stroked-button>
+        Select
+      </button>
+    </mat-card-actions>
+  </mat-card-content>
+</mat-card>
