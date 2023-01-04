@@ -1,1 +1,16 @@
-<p>power-ups works!</p>
+<div class="container">
+  <h2>Active</h2>
+  <app-power-up-card
+    *ngIf="activePowerUp$ | async"
+    [activePowerUp]="(activePowerUp$ | async) ?? sortedPowerUpsList[0]"
+    [powerUp]="(activePowerUp$ | async ) ?? sortedPowerUpsList[0]"
+  >
+  </app-power-up-card>
+  <h2>All</h2>
+  <app-power-up-card
+    (powerUpSelected)="onSetActivePowerUp($event)"
+    *ngFor="let powerUp of sortedPowerUpsList; trackBy: trackByTitle"
+    [activePowerUp]="(activePowerUp$ | async) ?? powerUpsList[0]"
+    [powerUp]="powerUp"
+  ></app-power-up-card>
+</div>
