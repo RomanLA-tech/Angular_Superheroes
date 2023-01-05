@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { map, Observable } from 'rxjs';
 
@@ -9,10 +8,7 @@ import { HeroesDbResponse } from '@services/interfaces';
 @Injectable({providedIn: 'root'})
 export class HeroService {
 
-  constructor(
-    private readonly router: Router,
-    private readonly http: HttpClient
-  ) {
+  constructor(private readonly http: HttpClient) {
   }
 
   public getHeroes(): Observable<ReadonlyArray<Hero>> {

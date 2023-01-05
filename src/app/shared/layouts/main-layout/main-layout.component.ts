@@ -35,11 +35,9 @@ export class MainLayoutComponent implements OnInit, OnDestroy {
 
   public logout(): void {
     if (this.authService.isLogged) {
-      this.authService.isLogged = false;
       this.authService.logout();
       this.router.navigate(['login']);
     }
-    return;
   }
 
   private getHeroesArrLength(): void {

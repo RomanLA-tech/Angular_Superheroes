@@ -5,6 +5,10 @@
   flex-direction: column;
   margin-top: 2rem;
 
+  .card-large__header {
+    cursor: pointer;
+  }
+
   h2 {
     width: 50vw;
     font-size: 2rem;
