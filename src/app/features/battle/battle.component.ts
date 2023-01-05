@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Observable, Subject, takeUntil } from 'rxjs';
+import { Observable, Subject, takeUntil, timer } from 'rxjs';
 
 import { BattleModalComponent } from '@features/battle/battle-modal/battle-modal.component';
 import { UserService } from '@services/user.service';
@@ -54,11 +54,11 @@ export class BattleComponent implements OnInit, OnDestroy {
       userHero: this.userHeroWithPowerUp,
       opponentHero: this.opponentHero
     };
-    setTimeout(() => {
+    timer(5000).subscribe(() => {
       this.loading = false;
       this.resultMessage = this.battleService.startNewBattle(heroes);
       this.openDialog();
-    }, 5000);
+    });
   }
 
   public initOpponentHero(): void {

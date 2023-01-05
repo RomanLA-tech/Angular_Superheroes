@@ -52,7 +52,7 @@
 
     <mat-card-actions>
       <button (click)="selectHero()"
-              [disabled]="hero.id === (selectedHero$ | async)?.id"
+              [disabled]="hero.id === (selectedHeroId$ | async)"
               class="action-btn"
               color="primary"
               mat-raised-button

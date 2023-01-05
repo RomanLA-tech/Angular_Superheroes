@@ -3,8 +3,8 @@
     <a [routerLink]="['/search']">
       Superheroes
     </a>
-    <div *ngIf="(userHeroes$ | async)?.length">
-      <a [routerLinkActive]="['active-link']" [routerLink]="['/battle']">
+    <div *ngIf="userHeroesArrLength">
+      <a *ngIf="isAuth$ | async" [routerLinkActive]="['active-link']" [routerLink]="['/battle']">
         <button class="link-btn" mat-button>
           Battle
         </button>

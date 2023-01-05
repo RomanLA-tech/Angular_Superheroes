@@ -12,7 +12,7 @@ export class BattleModalComponent {
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public readonly data: BattleModalData,
-    public readonly dialogRef: MatDialogRef<BattleModalComponent>
+    private readonly dialogRef: MatDialogRef<BattleModalComponent>
   ) {
   }
 
