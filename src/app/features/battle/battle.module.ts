@@ -1,26 +1,30 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { MatCardModule } from '@angular/material/card';
-import { MatButtonModule } from '@angular/material/button';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatCardModule } from '@angular/material/card';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
 
-import { HeroInfoComponent } from './hero-info.component';
+import { BattleComponent } from './battle.component';
+import { BattleModalComponent } from './battle-modal/battle-modal.component';
 
 @NgModule({
   declarations: [
-    HeroInfoComponent
+    BattleComponent,
+    BattleModalComponent
   ],
   imports: [
     CommonModule,
     RouterModule.forChild([{
-      path: '', component: HeroInfoComponent
+      path: '', component: BattleComponent
     }
     ]),
     MatCardModule,
+    MatDialogModule,
     MatButtonModule,
     MatProgressSpinnerModule
   ]
 })
-export class HeroInfoModule {
+export class BattleModule {
 }

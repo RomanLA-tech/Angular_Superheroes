@@ -1,8 +1,10 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+
 import { AuthGuard } from '@guards/auth.guard';
 
 const routes: Routes = [
+
   {path: '', redirectTo: '/login', pathMatch: 'full'},
   {
     path: 'login',
@@ -21,12 +23,18 @@ const routes: Routes = [
     path: 'hero/:id',
     canActivate: [AuthGuard],
     loadChildren: () => import('./features/hero-info/hero-info.module').then(m => m.HeroInfoModule)
+  },
+  {
+    path: 'battle',
+    canActivate: [AuthGuard],
+    loadChildren: () => import('./features/battle/battle.module').then(m => m.BattleModule)
   }
-
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {
+    preloadingStrategy: PreloadAllModules
+  })],
   exports: [RouterModule]
 })
 export class AppRoutingModule {

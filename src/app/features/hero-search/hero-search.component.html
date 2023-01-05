@@ -17,11 +17,15 @@
     <app-hero-card (heroSelected)="selectHero($event)"
                    *ngFor="let hero of heroes | searchHero:searchValue"
                    [hero]="hero"
-                   [selectedHeroId]="(selectedHeroId$ | async) ?? ''"
+                   [selectedHero]="(selectedHero$ | async) ?? heroes[0]"
     >
     </app-hero-card>
 
   </div>
 </div>
 
-<ng-template #loading><p>Please wait...</p></ng-template>
+<ng-template #loading>
+  <p>
+    <mat-spinner></mat-spinner>
+  </p>
+</ng-template>

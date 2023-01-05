@@ -4,7 +4,8 @@ import { BehaviorSubject, Observable } from 'rxjs';
 @Injectable()
 export class RecentlySearchedHeroService {
 
-  private readonly heroesStream = new BehaviorSubject<ReadonlyArray<string>>(this.getHeroesFromLocalStorage());
+  private readonly heroesStream = new BehaviorSubject<ReadonlyArray<string>>(
+    this.getHeroesFromLocalStorage());
 
   public get heroes$(): Observable<ReadonlyArray<string>> {
     return this.heroesStream.asObservable();

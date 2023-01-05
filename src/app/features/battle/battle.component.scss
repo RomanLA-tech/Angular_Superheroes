@@ -1,0 +1,110 @@
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+  background-color: darkorchid;
+  color: white;
+
+  .fight-button {
+    font-size: 18px;
+  }
+}
+
+.battle-area {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 3rem;
+
+  .battle-area-center {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  .hero-card {
+    width: 20vw;
+    display: flex;
+    gap: 2rem;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+
+    .hero-avatar {
+      margin-top: 1rem;
+      width: 200px;
+      height: 200px;
+    }
+
+    .hero-name {
+      font-size: 24px;
+    }
+
+    .hero-stats {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      p {
+        font-size: 18px;
+      }
+    }
+  }
+
+  .hero-card-left {
+    margin-right: 50px;
+  }
+
+  .hero-card-right {
+    margin-left: 50px;
+  }
+
+  .hero-names {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    .hero-name {
+      text-align: center;
+      max-width: 170px;
+      margin: 0 auto;
+    }
+
+    .vs {
+      margin: 0 20px;
+      font-size: 36px;
+    }
+  }
+
+  .start-button {
+    width: 200px;
+    font-size: 18px;
+  }
+
+  .loader {
+    width: 50px;
+    height: 50px;
+    margin: 50px auto;
+  }
+
+  .powerups {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 20vw;
+    margin: 0 auto;
+    text-align: center;
+
+    .power-up-image {
+      width: 50px;
+      height: 50px;
+    }
+  }
+}
+
+

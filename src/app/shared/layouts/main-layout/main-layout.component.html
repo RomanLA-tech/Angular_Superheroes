@@ -1,24 +1,30 @@
 <header>
-  <mat-toolbar color="primary">
+  <mat-toolbar class="header" color="primary">
     <a [routerLink]="['/search']">
       Superheroes
     </a>
-    <span class="spacer"></span>
-    <a [routerLinkActive]="['active-link']"
-       [routerLink]="['/user-info']">
-      <button mat-button>
-        User info
+    <div *ngIf="(userHeroes$ | async)?.length">
+      <a [routerLinkActive]="['active-link']" [routerLink]="['/battle']">
+        <button class="link-btn" mat-button>
+          Battle
+        </button>
+      </a>
+    </div>
+    <div *ngIf="isAuth$ | async" class="right-content">
+      <a [routerLinkActive]="['active-link']" [routerLink]="['/user-info']">
+        <button class="link-btn" mat-button>
+          User info
+        </button>
+      </a>
+      <button (click)="logout()"
+              aria-label="Logout icon-button with logout icon"
+              mat-icon-button
+      >
+        <mat-icon>
+          logout
+        </mat-icon>
       </button>
-    </a>
-    <button (click)="logout()"
-            *ngIf="isAuth$ | async"
-            aria-label="Logout icon-button with logout icon"
-            mat-icon-button
-    >
-      <mat-icon>
-        logout
-      </mat-icon>
-    </button>
+    </div>
   </mat-toolbar>
 </header>
 

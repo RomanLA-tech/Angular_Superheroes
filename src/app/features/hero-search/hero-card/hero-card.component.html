@@ -1,6 +1,6 @@
-<mat-card [routerLink]="['/hero', hero.id]" class="hero-card">
+<mat-card class="hero-card">
 
-  <mat-card-header>
+  <mat-card-header [routerLink]="['/hero', hero.id]">
     <mat-card-title>
       {{hero.name}}
     </mat-card-title>
@@ -25,7 +25,7 @@
   <mat-card-actions>
 
     <button (click)="setSelectedHero()"
-            [disabled]="hero.id === selectedHeroId"
+            [disabled]="hero.id === selectedHero.id"
             color="primary"
             mat-raised-button>
       Select Hero

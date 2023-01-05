@@ -11,13 +11,15 @@ import { UserService } from '@services/user.service';
 })
 export class HeroesListTabComponent {
 
-  public selectedHeroId$: Observable<Readonly<string>> = this.userService.userSelectedHeroId$;
+  public selectedHero$: Observable<Readonly<Hero>> = this.userService.userSelectedHero$;
   public userHeroes$: Observable<ReadonlyArray<Hero>> = this.userService.userHeroes$;
+  public heroes: ReadonlyArray<Hero> = this.userService.userHeroes;
 
   constructor(private readonly userService: UserService) {
   }
 
   public selectHero(hero: Readonly<Hero>): void {
-    this.userService.userSelectedHeroId = hero.id;
+    this.userService.addUserHeroToLocalStorage(hero);
+    this.userService.userSelectedHero = hero;
   }
 }

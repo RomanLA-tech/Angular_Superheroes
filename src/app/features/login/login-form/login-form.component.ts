@@ -3,10 +3,11 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
 
-import { LoginForm, LoginFormValue, RegisterForm, RegisterFormValue } from '@interfaces/login-form.interface';
-import { AuthService } from '@services/auth.service';
-import { User } from '@interfaces/user.interface';
 import { CustomValidators } from '@utils/validators';
+import { AuthService } from '@services/auth.service';
+import { PowerUpService } from '@services/power-up.service';
+import { User } from '@interfaces/user.interface';
+import { LoginForm, LoginFormValue, RegisterForm, RegisterFormValue } from '@interfaces/login-form.interface';
 
 @Component({
   selector: 'app-login-form',
@@ -23,10 +24,11 @@ export class LoginFormComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject<void>();
 
   constructor(
-    public readonly auth: AuthService,
-    private readonly validators: CustomValidators,
     private readonly router: Router,
-    private readonly route: ActivatedRoute
+    private readonly route: ActivatedRoute,
+    public readonly auth: AuthService,
+    private readonly powerUpService: PowerUpService,
+    private readonly validators: CustomValidators
   ) {
   }
 
@@ -36,7 +38,7 @@ export class LoginFormComponent implements OnInit, OnDestroy {
     this.onRouteQueryParamsSubscribe();
   }
 
-  ngOnDestroy(): void {
+  public ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
   }
@@ -72,6 +74,7 @@ export class LoginFormComponent implements OnInit, OnDestroy {
 
   private onSuccessfulLoginActions(user: Readonly<User>) {
     this.auth.login(user);
+    this.powerUpService.savePowerUpToLocalStorage();
     this.router.navigate(['search']);
   }
 

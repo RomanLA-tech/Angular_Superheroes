@@ -10,10 +10,10 @@ import { Hero } from '@interfaces/hero.interface';
 export class HeroCardLargeComponent {
 
   @Input() public hero: Readonly<Hero>;
-  @Input() public selectedHeroId: Readonly<string>;
+  @Input() public selectedHero: Readonly<Hero>;
   @Output() public heroSelected = new EventEmitter<Hero>();
 
-  public setSelectedHero() {
+  public setSelectedHero(): void {
     this.heroSelected.emit(this.hero);
   }
 }

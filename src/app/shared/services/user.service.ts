@@ -6,21 +6,22 @@ import { Hero } from '@interfaces/hero.interface';
 @Injectable({providedIn: 'root'})
 export class UserService {
 
-  private readonly userSelectedHeroIdStream = new BehaviorSubject<Readonly<string>>
-  (this.getUserHeroesFromLocalStorage()[0].id || '0');
+  private readonly userSelectedHeroStream = new BehaviorSubject<Readonly<Hero>>(
+    this.getUserHeroesFromLocalStorage()[0] || {} as Hero);
 
-  private readonly userHeroesStream = new BehaviorSubject<ReadonlyArray<Hero>>(this.getUserHeroesFromLocalStorage());
+  private readonly userHeroesStream = new BehaviorSubject<ReadonlyArray<Hero>>(
+    this.getUserHeroesFromLocalStorage());
 
-  public get userSelectedHeroId$(): Observable<Readonly<string>> {
-    return this.userSelectedHeroIdStream.asObservable();
+  public get userSelectedHero$(): Observable<Readonly<Hero>> {
+    return this.userSelectedHeroStream.asObservable();
   }
 
-  public get userSelectedHeroId(): Readonly<string> {
-    return this.userSelectedHeroIdStream.value;
+  public get userSelectedHero(): Readonly<Hero> {
+    return this.userSelectedHeroStream.value;
   }
 
-  public set userSelectedHeroId(heroId: Readonly<string>) {
-    this.userSelectedHeroIdStream.next(heroId);
+  public set userSelectedHero(hero: Readonly<Hero>) {
+    this.userSelectedHeroStream.next(hero);
   }
 
   public get userHeroes$(): Observable<ReadonlyArray<Hero>> {
@@ -35,16 +36,21 @@ export class UserService {
     this.userHeroesStream.next(heroes);
   }
 
+  public getRandomHero(): Readonly<Hero> {
+    const numberOfHeroes = this.userHeroes.length;
+    return this.userHeroes[Math.floor(Math.random() * numberOfHeroes)];
+  }
+
   public getUserHeroesFromLocalStorage(): ReadonlyArray<Hero> {
     return JSON.parse(localStorage.getItem('heroes') || '[]');
   }
 
   public addUserHeroToLocalStorage(hero: Readonly<Hero>): void {
-    const oldState = this.getUserHeroesFromLocalStorage();
+    let oldState = this.getUserHeroesFromLocalStorage();
     if (oldState.find((item) => item.id === hero.id)) {
-      return;
+      oldState = oldState.filter((item) => item.id !== hero.id);
     }
     const newState = [hero, ...oldState];
-    return localStorage.setItem('heroes', JSON.stringify([...newState]));
+    localStorage.setItem('heroes', JSON.stringify([...newState]));
   }
 }

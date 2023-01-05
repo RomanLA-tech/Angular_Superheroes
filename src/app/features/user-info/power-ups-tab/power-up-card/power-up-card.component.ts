@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+
 import { PowerUp } from '@interfaces/power-up.interface';
 
 @Component({
@@ -8,11 +9,11 @@ import { PowerUp } from '@interfaces/power-up.interface';
 })
 export class PowerUpCardComponent {
 
-  @Input() powerUp: Readonly<PowerUp>;
-  @Input() activePowerUp: Readonly<PowerUp>;
+  @Input() public powerUp: Readonly<PowerUp>;
+  @Input() public activePowerUp: Readonly<PowerUp>;
   @Output() public powerUpSelected = new EventEmitter<PowerUp>();
 
-  public setSelectedPowerUp() {
+  public setSelectedPowerUp(): void {
     this.powerUpSelected.emit(this.powerUp);
   }
 }

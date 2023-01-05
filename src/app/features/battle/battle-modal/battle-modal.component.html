@@ -1,0 +1,13 @@
+<mat-dialog-content class="modal-body">
+
+  <h2>{{data.userHero.name | uppercase}}</h2>
+
+  <img class="hero-avatar" mat-card-image src="{{data.userHero.image}}">
+
+  <h2>{{ data.resultMessage }}</h2>
+
+  <mat-dialog-actions class="modal-footer">
+    <button (click)="onCloseClick()" class="ok-button" mat-button>OK</button>
+  </mat-dialog-actions>
+
+</mat-dialog-content>

@@ -1,9 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { HeroService } from '@services/hero.service';
 import { Observable, Subject, takeUntil } from 'rxjs';
-import { Hero } from '@interfaces/hero.interface';
+
+import { HeroService } from '@services/hero.service';
 import { UserService } from '@services/user.service';
+import { Hero } from '@interfaces/hero.interface';
 
 @Component({
   selector: 'app-hero-info',
@@ -12,15 +13,15 @@ import { UserService } from '@services/user.service';
 })
 export class HeroInfoComponent implements OnInit, OnDestroy {
 
+  public selectedHero$: Observable<Readonly<Hero>> = this.userService.userSelectedHero$;
   public heroId: Readonly<string> = this.route.snapshot.paramMap.get('id')!;
-  public selectedHeroId$: Observable<Readonly<string>>;
   public hero: Readonly<Hero>;
   private destroy$ = new Subject<void>();
 
   constructor(
+    private readonly route: ActivatedRoute,
     private readonly heroService: HeroService,
-    private readonly userService: UserService,
-    private readonly route: ActivatedRoute
+    private readonly userService: UserService
   ) {
   }
 
@@ -34,7 +35,7 @@ export class HeroInfoComponent implements OnInit, OnDestroy {
   }
 
   public selectHero(): void {
-    this.userService.userSelectedHeroId = this.hero.id;
+    this.userService.userSelectedHero = this.hero;
     this.userService.addUserHeroToLocalStorage(this.hero);
   }
 

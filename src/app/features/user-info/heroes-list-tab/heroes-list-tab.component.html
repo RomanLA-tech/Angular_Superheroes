@@ -1,11 +1,25 @@
-<app-hero-card-large
-  (heroSelected)="selectHero($event)"
-  *ngFor="let hero of userHeroes$ | async"
-  [hero]="hero"
-  [selectedHeroId]="(selectedHeroId$ | async) ?? ''">
-</app-hero-card-large>
-<div class="add-button-container">
-  <button [routerLink]="['/search']" aria-label="icon button with a add icon" color="primary" mat-fab>
-    <mat-icon>add</mat-icon>
-  </button>
+<div *ngIf="heroes.length; else noHeroes">
+
+  <app-hero-card-large
+    (heroSelected)="selectHero($event)"
+    *ngFor="let hero of userHeroes$ | async"
+    [hero]="hero"
+    [selectedHero]="(selectedHero$ | async) ?? heroes[0]">
+  </app-hero-card-large>
+
+  <div class="add-button-container">
+    <button [routerLink]="['/search']" aria-label="icon button with a add icon" color="primary" mat-fab>
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
+
 </div>
+
+<ng-template #noHeroes>
+  <div class="no-items-template">
+    <h4>No selected heroes yet </h4>
+    <a [routerLink]="['/search']">
+      Add
+    </a>
+  </div>
+</ng-template>
