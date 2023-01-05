@@ -1,9 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { map, Observable, Subject, takeUntil } from 'rxjs';
+
 import { HeroService } from '@services/hero.service';
-import { Observable, Subject, takeUntil } from 'rxjs';
-import { Hero } from '@interfaces/hero.interface';
 import { UserService } from '@services/user.service';
+import { Hero } from '@interfaces/hero.interface';
 
 @Component({
   selector: 'app-hero-info',
@@ -12,19 +13,21 @@ import { UserService } from '@services/user.service';
 })
 export class HeroInfoComponent implements OnInit, OnDestroy {
 
-  public heroId: Readonly<string> = this.route.snapshot.paramMap.get('id')!;
+  public selectedHero$: Observable<Readonly<Hero>> = this.userService.userSelectedHero$;
   public selectedHeroId$: Observable<Readonly<string>>;
+  public heroId: Readonly<string> = this.route.snapshot.paramMap.get('id')!;
   public hero: Readonly<Hero>;
   private destroy$ = new Subject<void>();
 
   constructor(
+    private readonly route: ActivatedRoute,
     private readonly heroService: HeroService,
-    private readonly userService: UserService,
-    private readonly route: ActivatedRoute
+    private readonly userService: UserService
   ) {
   }
 
   public ngOnInit(): void {
+    this.selectedHeroIdInit();
     this.getHero();
   }
 
@@ -34,8 +37,12 @@ export class HeroInfoComponent implements OnInit, OnDestroy {
   }
 
   public selectHero(): void {
-    this.userService.userSelectedHeroId = this.hero.id;
+    this.userService.userSelectedHero = this.hero;
     this.userService.addUserHeroToLocalStorage(this.hero);
+  }
+
+  private selectedHeroIdInit(): void {
+    this.selectedHeroId$ = this.selectedHero$.pipe(map((hero) => hero.id));
   }
 
   private getHero(): void {

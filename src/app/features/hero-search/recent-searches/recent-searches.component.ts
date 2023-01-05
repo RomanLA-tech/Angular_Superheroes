@@ -10,20 +10,20 @@ import { RecentlySearchedHeroService } from '@services/recently-searched-hero.se
 })
 export class RecentSearchesComponent implements OnInit {
 
-  public recentSearches$: Observable<ReadonlyArray<string>>;
+  @Output() public heroSelected: EventEmitter<string> = new EventEmitter<string>();
 
-  @Output() heroSelected: EventEmitter<string> = new EventEmitter<string>();
+  public recentSearches$: Observable<ReadonlyArray<string>>;
 
   constructor(
     private readonly recentlySearchedService: RecentlySearchedHeroService) {
   }
 
-  public recentHeroSelected(heroName: Readonly<string>): void {
-    this.heroSelected.emit(heroName);
-  }
-
   public ngOnInit(): void {
     this.recentSearches$ = this.recentlySearchedService.heroes$;
+  }
+
+  public recentHeroSelected(heroName: Readonly<string>): void {
+    this.heroSelected.emit(heroName);
   }
 
 }

@@ -1,15 +1,16 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject, Observable } from 'rxjs';
+
 import { PowerUp } from '@interfaces/power-up.interface';
 import { POWER_UPS_ARR } from '@utils/constants';
-import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PowerUpService {
 
-  private readonly activePowerUpStream = new BehaviorSubject<Readonly<PowerUp>>
-  (this.getPowerUpsFromLocalStorage()[0] || {} as PowerUp);
+  private readonly activePowerUpStream = new BehaviorSubject<Readonly<PowerUp>>(
+    this.initPowerUp()[0]);
 
   public get activePowerUp$(): Observable<Readonly<PowerUp>> {
     return this.activePowerUpStream.asObservable();
@@ -21,6 +22,11 @@ export class PowerUpService {
 
   public set activePowerUp(powerUp: Readonly<PowerUp>) {
     this.activePowerUpStream.next(powerUp);
+  }
+
+  public getRandomPowerUp(): Readonly<PowerUp> {
+    const numberOfPowerUps = this.getPowerUpsFromLocalStorage().length;
+    return this.getPowerUpsFromLocalStorage()[Math.floor(Math.random() * numberOfPowerUps)];
   }
 
   public initPowerUp(): ReadonlyArray<PowerUp> {

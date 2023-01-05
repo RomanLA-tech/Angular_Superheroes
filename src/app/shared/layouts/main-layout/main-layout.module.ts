@@ -1,18 +1,15 @@
-import { LayoutModule } from '@angular/cdk/layout';
-import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { RouterLink, RouterLinkActive } from '@angular/router';
+import { LayoutModule } from '@angular/cdk/layout';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 
 import { MainLayoutComponent } from '@layouts/main-layout/main-layout.component';
-import { RouterLink, RouterLinkActive } from '@angular/router';
 
 @NgModule({
   declarations: [MainLayoutComponent],
-  exports: [
-    MainLayoutComponent
-  ],
   imports: [
     CommonModule,
     LayoutModule,
@@ -22,6 +19,9 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
     MatButtonModule,
     RouterLink,
     RouterLinkActive
+  ],
+  exports: [
+    MainLayoutComponent
   ]
 })
 export class MainLayoutModule {

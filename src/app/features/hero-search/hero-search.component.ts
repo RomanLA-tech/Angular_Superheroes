@@ -15,7 +15,7 @@ import { UserService } from '@services/user.service';
 })
 export class HeroSearchComponent implements OnInit, OnDestroy {
 
-  public selectedHeroId$: Observable<Readonly<string>>;
+  public selectedHero$: Observable<Readonly<Hero>> = this.userService.userSelectedHero$;
   public heroes: ReadonlyArray<Hero>;
   public searchForm: FormGroup<SearchForm>;
   public searchValue: Readonly<string>;
@@ -31,7 +31,6 @@ export class HeroSearchComponent implements OnInit, OnDestroy {
   public ngOnInit(): void {
     this.searchFormInit();
     this.getHeroes();
-    this.selectedHeroIdInit();
   }
 
   public ngOnDestroy(): void {
@@ -45,7 +44,7 @@ export class HeroSearchComponent implements OnInit, OnDestroy {
   }
 
   public selectHero(hero: Readonly<Hero>): void {
-    this.userService.userSelectedHeroId = hero.id;
+    this.userService.userSelectedHero = hero;
     this.userService.addUserHeroToLocalStorage(hero);
     this.userService.userHeroes = this.userService.getUserHeroesFromLocalStorage();
   }
@@ -62,10 +61,6 @@ export class HeroSearchComponent implements OnInit, OnDestroy {
     this.searchValue = searchValue;
     this.getHeroes();
     this.addToRecentSearches(searchValue);
-  }
-
-  private selectedHeroIdInit(): void {
-    this.selectedHeroId$ = this.userService.userSelectedHeroId$;
   }
 
   private getHeroes(): void {

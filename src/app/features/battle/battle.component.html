@@ -1,0 +1,73 @@
+<div class="header">
+  <button (click)="startBattle()" [disabled]="loading" class="fight-button" mat-button>Fight</button>
+</div>
+<div class="battle-area">
+  <mat-card class="hero-card hero-card-left">
+    <img class="hero-avatar" mat-card-image src="{{userHero.image}}">
+    <mat-card-title class="hero-name">{{userHero.name}}</mat-card-title>
+    <mat-card-content class="hero-stats">
+      <p>Strength: {{userHero.powerstats.strength}}</p>
+      <p>Combat: {{userHero.powerstats.combat}}</p>
+      <p>Speed: {{userHero.powerstats.speed}}</p>
+      <p>Power: {{userHero.powerstats.power}}</p>
+      <p>Intelligence: {{userHero.powerstats.intelligence}}</p>
+      <p>Durability: {{userHero.powerstats.durability}}</p>
+    </mat-card-content>
+  </mat-card>
+
+  <div *ngIf="!loading; else spinner" class="battle-area-center">
+    <div class="hero-names">
+      <h2 class="hero-name">{{userHero.name}}</h2>
+      <h2 class="vs">vs</h2>
+      <h2 class="hero-name">{{opponentHero.name}}</h2>
+    </div>
+
+    <button (click)="startBattle()"
+            class="start-button"
+            color="primary"
+            mat-raised-button>
+      Start
+    </button>
+
+    <mat-card class="powerups">
+      <h3>Active USER Power Up</h3>
+      <img class="power-up-image" mat-card-image src="{{userPowerUp.image}}">
+      <b>{{userPowerUp.title}}:</b>
+      <p>{{userPowerUp.powerStatsName}} +
+        {{userPowerUp.powerStatsValue}}</p>
+    </mat-card>
+    <mat-card class="powerups">
+      <h3>Active OPPONENT Power Up</h3>
+      <img class="power-up-image" mat-card-image src="{{opponentPowerUp.image}}">
+      <b>{{opponentPowerUp.title}}:</b>
+      <p>{{opponentPowerUp.powerStatsName}} +
+        {{opponentPowerUp.powerStatsValue}}</p>
+    </mat-card>
+
+    <button (click)="initOpponentHero()"
+            class="start-button"
+            color="primary"
+            mat-raised-button>
+      Get new enemy
+    </button>
+  </div>
+
+  <mat-card class="hero-card hero-card-right">
+    <img class="hero-avatar" mat-card-image src="{{opponentHero.image}}">
+    <mat-card-title class="hero-name">{{opponentHero.name}}</mat-card-title>
+    <mat-card-content class="hero-stats">
+      <p>Strength: {{opponentHero.powerstats.strength}}</p>
+      <p>Combat: {{opponentHero.powerstats.combat}}</p>
+      <p>Speed: {{opponentHero.powerstats.speed}}</p>
+      <p>Power: {{opponentHero.powerstats.power}}</p>
+      <p>Intelligence: {{opponentHero.powerstats.intelligence}}</p>
+      <p>Durability: {{opponentHero.powerstats.durability}}</p>
+    </mat-card-content>
+  </mat-card>
+
+
+</div>
+
+<ng-template #spinner>
+  <mat-spinner class="loader"></mat-spinner>
+</ng-template>

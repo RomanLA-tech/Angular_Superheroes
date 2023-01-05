@@ -1,0 +1,22 @@
+.modal-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .ok-button {
+    font-size: 18px;
+  }
+}
+
+.hero-avatar {
+  margin-top: 1rem;
+  width: 200px;
+  height: 200px;
+}
